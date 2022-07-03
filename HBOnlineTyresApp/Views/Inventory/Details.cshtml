@@ -1,0 +1,137 @@
+﻿@model Inventory
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<div class="row">
+    
+        <div class="col-md-8 offset-2">
+            <div class="card mb-3" style="max-width: 8000px">
+                <div class="row g-0">
+                    <div class="col-md-12">
+                        <div class="card-header text-white bg-danger">
+                            <p class="card-text">
+                                <h5 class="card-title">
+                                    @Model.Specifications.Tyre.Name
+                                    <a class="text-white float-right"></a>
+                                </h5>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <img src="@Model.Specifications.Tyre.ImageURL" style = "max-width: 250px" alt="@Model.Specifications.Tyre.Name">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <p class="card-text"><b>Size:   </b>@Model.Specifications.Size</p>
+                            <p class="card-text"><b>Manufacturer: </b>@Model.Specifications.Tyre.Manufacturer.Name</p>
+                            <p class="card-text"><b>Category: </b>@Model.Specifications.Tyre.category.Name</p>
+                            <p class="card-text ">
+                                <b>Status: </b>
+                                  @if (Model.Quantity > 12)
+                                {
+                                    <span class="badge bg-success text-white">IN STOCK
+                                        <p class="card-text"><b>Available: </b>@Model.Quantity</p>
+                                    </span>
+                                }
+                                else if (Model.Quantity <13 && Model.Quantity > 0) 
+                                {
+                                     <span class="badge bg-warning text-white">LOW STOCK
+                                        <p class="card-text"><b> Only </b>@Model.Quantity <b> left in stock. Order Soon </b></p>
+                                    </span>
+                                }
+                                else
+                                {
+                                <span class="badge bg-danger text-white">OUT OF STOCK</span>
+                                }
+                          
+                            </p>
+
+                        </div>
+                    </div>
+                    
+                    <div class= " col-md-12">
+                        <div class = "card-body">
+                            <hr />
+                            <h3 class = "text-center"> Description</h3>
+                            <div class= "row">
+                                <p class="card-text"><b></b>@Model.Specifications.Tyre.Description</p>
+                            </div>
+                           
+                            <hr/>
+                            <div class = "row">
+                                <div>
+                                    <table class ="table">
+                                        <thead class = "text-center">
+                                            
+                                            <tr class="card-header text-white bg-danger"> 
+                                              <th> @Html.DisplayNameFor(model => model.Specifications.Tyre.Name)</th>
+                                              <th> @Html.DisplayNameFor(model => model.Specifications.Tyre.category.Name)</th>
+                                              <th> @Html.DisplayNameFor(model => model.Specifications.RimSize)</th>
+                                              <th> @Html.DisplayNameFor(model => model.Specifications.ServiceDescription)</th>
+                                              <th> @Html.DisplayNameFor(model => model.Specifications.SideWall)</th>
+                                              <th> @Html.DisplayNameFor(model => model.Specifications.SectionWidth)</th>
+                                              <th> @Html.DisplayNameFor(model => model.Specifications.Diameter)</th>
+                                              <th> @Html.DisplayNameFor(model => model.Specifications.MaxPSI)</th>
+                                              <th> @Html.DisplayNameFor(model => model.Specifications.MaxLoad)</th>
+                                              <th> @Html.DisplayNameFor(model => model.Specifications.Weight)</th>
+                                              <th> @Html.DisplayNameFor(model => model.Specifications.ThreadDept)</th>
+                                              <th> @Html.DisplayNameFor(model => model.Specifications.AprovedRimWidth)</th>
+                                              
+                                           </tr>
+
+                                        </thead>
+                                        <tbody class = "text-center"> 
+                
+                                                <tr>
+                                                <td class = "align-middle">@Model.Specifications.Tyre.Name </td>
+                                                <td class = "align-middle">@Model.Specifications.Tyre.category.Name </td>
+                                                <td class = "align-middle">@Model.Specifications.RimSize </td>
+                                                <td class = "align-middle">@Model.Specifications.ServiceDescription </td>
+                                                <td class = "align-middle">@Model.Specifications.SideWall </td>
+                                                <td class = "align-middle">@Model.Specifications.SectionWidth </td>
+                                                <td class = "align-middle">@Model.Specifications.Diameter</td>
+                                                <td class = "align-middle">@Model.Specifications.MaxPSI </td>
+                                                <td class = "align-middle">@Model.Specifications.MaxLoad </td>
+                                                <td class = "align-middle">@Model.Specifications.Weight </td>
+                                                <td class = "align-middle">@Model.Specifications.ThreadDept </td>
+                                                <td class = "align-middle">@Model.Specifications.AprovedRimWidth </td>
+                                                    
+                                                </tr>
+          
+                                        </tbody>
+            
+                                    </table>
+                                </div>
+
+                            </div>
+                              <div class= "row">
+                                  <img src="@Model.Specifications.Tyre.Manufacturer.LogoURL" style = "max-width: 250px; padding:20px" alt="@Model.Specifications.Tyre.Manufacturer.Name">
+
+                                <p class="card-text"><b></b>@Model.Specifications.Tyre.Manufacturer.Description</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="card-footer ">
+                            <p class="card-text">
+                                 @if (Model.Quantity >0) 
+                                {
+                                <a class="btn btn-outline-danger float-right" asp-action = "Products"> Back to list</a>
+                                <a class="btn btn-success text-white" style= "padding-left: 100px"><i class="bi bi-cart-plus"></i> Add to Cart (Price @Model.Specifications.Cost.ToString("c"))</a>
+                                }
+                                else{
+                                      <a class="btn btn-outline-danger float-right" asp-action = "Products"> Back to list</a>
+                                }
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+</div>

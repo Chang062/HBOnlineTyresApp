@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Inventory>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 col-xs-6 border-primary mb-3">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-12">
+                        <div class="card-header text-white bg-danger">
+                            <p class="card-text">
+                                <h5 class="card-title">
+                                    @item.Specifications.Tyre.Name
+                                    <a class="text-white float-right"></a>
+                                </h5>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="@item.Specifications.Tyre.ImageURL" width="100%" alt="@item.Specifications.Tyre.Name">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <p class="card-text"><b>Size:   </b>@item.Specifications.Size</p>
+                            <p class="card-text"><b>Manufacturer: </b>@item.Specifications.Tyre.Manufacturer.Name</p>
+                            <p class="card-text"><b>Category: </b>@item.Specifications.Tyre.Category.Name</p>
+                            <p class="card-text ">
+                                <b>Status: </b>
+                                  @if (item.Quantity > 12)
+                                {
+                                    <span class="badge bg-success text-white">IN STOCK
+                                        <p class="card-text"><b>Available: </b>@item.Quantity</p>
+                                    </span>
+                                }
+                                else if (item.Quantity <13 && item.Quantity > 0) 
+                                {
+                                     <span class="badge bg-warning text-white">LOW STOCK
+                                        <p class="card-text"><b> Only </b>@item.Quantity <b> left in stock. Order Soon </b></p>
+                                    </span>
+                                }
+                                else
+                                {
+                                <span class="badge bg-danger text-white">OUT OF STOCK</span>
+                                }
+                          
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card-footer ">
+                            <p class="card-text">
+                                 @if (item.Quantity >0) 
+                                {
+                                <a class="btn btn-outline-danger float-right" asp-action = "Details" asp-route-id ="@item.Id"><i class="bi bi-eye-fill"></i> Show Details</a>
+                                <a class="btn btn-success text-white"><i class="bi bi-cart-plus"></i> Add to Cart (Price @item.Specifications.Cost.ToString("c"))</a>
+                                }
+                                else{
+                                    <a class="btn btn-outline-danger float-right" asp-action = "Details" asp-route-id ="@item.Id"><i class="bi bi-eye-fill"></i> Show Details</a>
+                                }
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
