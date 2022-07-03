@@ -10,9 +10,9 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-black border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img src = "https://drive.google.com/uc?id=1-Etc_E7DU_oToyeIAlay5_vhW4BzxpC-" style ="max-width:80px "/></a>
+                <a class="navbar-brand"  asp-controller="Home" asp-action="Index"><img src = "https://drive.google.com/uc?id=1J5yCF1C4m6VPWJHTtoB0WwJGWpCga_tY" style ="max-width:80px"/></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,34 +20,33 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Inventory" asp-action="Products"> Inventory</a>
+                            <a class="nav-link text-white" style = "padding-left: 90px; padding-right:90px" asp-area="" asp-controller="Inventory" asp-action="Products"> Inventory</a>
                         </li>
                         <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="bi bi-gear"></i> Management
-                                </a>
+                                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                     Support</a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" asp-controller="Cinemas" asp-action="Index"><i class="bi bi-camera-reels"></i> Cinemas</a>
-                                    <a class="dropdown-item" asp-controller="Producers" asp-action="Index"><i class="bi bi-headset"></i> Producers</a>
-                                    <a class="dropdown-item" asp-controller="Actors" asp-action="Index"><i class="bi bi-person-square"></i> Actors</a>
+                                    <a class="dropdown-item" asp-controller="#" asp-action="#"> About US</a>
+                                    <a class="dropdown-item" asp-controller="#" asp-action="#"> FAQ</a>
+                                    <a class="dropdown-item" asp-controller="#" asp-action="#"> Testimonials</a>
                                 </div>
                             </li>
                        
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="bi bi-gear"></i> Management
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" asp-controller="Inventory" asp-action="Index"> Inventory</a>
-                                    <a class="dropdown-item" asp-controller="Manfacturers" asp-action="Index"> Brand</a>
+                                    <a class="dropdown-item" asp-controller="Manufacturers" asp-action="Index"> Brand</a>
                                     <a class="dropdown-item" asp-controller="Tyres" asp-action="Index"> Tyre</a>
                                 </div>
                             </li>
                     </ul>
 
-                    <form class="form-inline my-2 my-lg-0" asp-controller="Home" asp-action="Filter" style="padding-right: 25px;">
+                    <form class="d-lg-inline-flex my-2 my-lg-0" asp-controller="Products" asp-action="Filter" style="padding-right: 25px; min-width:150px">
                         <input name="searchString" type="text" class="form-control" placeholder="Search for a tyre..." aria-label="Recipient's username" aria-describedby="button-addon2">
                         <button class="btn btn-outline-danger my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
                     </form>
