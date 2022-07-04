@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using HBOnlineTyresApp.Data.Base;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HBOnlineTyresApp.Models
 {
-    public class Specification
+    public class Specification:IEntityBase
     {
         [Key]
         public int Id { get; set; }

@@ -1,4 +1,5 @@
 ﻿using HBOnlineTyresApp.Data;
+using HBOnlineTyresApp.Data.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,16 +7,15 @@ namespace HBOnlineTyresApp.Controllers
 {
     public class SpecificationsController : Controller
     {
-        private readonly AppDbContext _AppContext;
+        private readonly ISpecificationsService _service;
 
-        public SpecificationsController(AppDbContext context)
+        public SpecificationsController(ISpecificationsService service)
         {
-            _AppContext = context;
-
+            _service = service;
         }
         public async Task<IActionResult> Index()
         {
-            var data = await _AppContext.Specifications.Include("Tyre").ToListAsync();
+            var data = await _service.GetAsync(t=> t.Tyre, c=> c.Tyre.category, m=> m.Tyre.Manufacturer);
             return View(data);
         }
     }

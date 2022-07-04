@@ -12,6 +12,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IManufacturersService, ManufacturersService>();
 builder.Services.AddScoped<IInventoryService, InventoryService>();
 builder.Services.AddScoped<ITyresService, TyresService>();
+builder.Services.AddScoped<ISpecificationsService, SpecificationsService>();
 
 var app = builder.Build();
 

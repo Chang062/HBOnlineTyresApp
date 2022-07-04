@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Specification>
+
+@{
+    ViewData["Title"] = "Specification";
+}
+
+@*Wtite Code*@
+
+<div class = "row">
+    <div class = "col">
+
+        <table class ="table">
+            <thead class = "text-center">
+               <tr class="card-header text-white bg-danger">                    
+                  <th> @Html.DisplayNameFor(model => model.Tyre.Name)</th>
+                  <th> @Html.DisplayNameFor(model => model.Tyre.category.Name)</th>
+                  <th> @Html.DisplayNameFor(model => model.Tyre.Manufacturer.Name)</th>
+                  <th> @Html.DisplayNameFor(model => model.Size)</th>
+                  <th> @Html.DisplayNameFor(model => model.RimSize)</th>
+                  <th> @Html.DisplayNameFor(model => model.ServiceDescription)</th>
+                  <th> @Html.DisplayNameFor(model => model.SideWall)</th>
+                  <th> @Html.DisplayNameFor(model => model.Diameter)</th>
+                  <th> @Html.DisplayNameFor(model => model.MaxPSI)</th>
+                  <th> @Html.DisplayNameFor(model => model.MaxLoad)</th>
+                  <th> @Html.DisplayNameFor(model => model.Weight)</th>
+                  <th> @Html.DisplayNameFor(model => model.ThreadDept)</th>
+                  <th> @Html.DisplayNameFor(model => model.AprovedRimWidth)</th>
+                 <th> @Html.DisplayNameFor(model => model.Cost)</th>
+
+                  <th style = ""> </th>
+                  
+               </tr>
+
+            </thead>
+            <tbody class = "text-center"> 
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class = "align-middle">  @Html.DisplayFor(modelItem => item.Tyre.Name)</td>
+                        <td class = "align-middle">  @Html.DisplayFor(modelItem => item.Tyre.category.Name)</td>
+                        <td class = "align-middle "> @Html.DisplayFor(modelItem => item.Tyre.Manufacturer.Name)</td>
+                        <td class = "align-middle "> @Html.DisplayFor(modelItem => item.Size)</td>
+                        <td class = "align-middle"> @Html.DisplayFor(modelItem => item.RimSize)</td>
+                        <td class = "align-middle"> @Html.DisplayFor(modelItem => item.ServiceDescription)</td>
+                        <td class = "align-middle"> @Html.DisplayFor(modelItem => item.SideWall)</td>
+                        <td class = "align-middle"> @Html.DisplayFor(modelItem => item.Diameter)</td>
+                        <td class = "align-middle"> @Html.DisplayFor(modelItem => item.MaxPSI)</td>
+                        <td class = "align-middle"> @Html.DisplayFor(modelItem => item.MaxLoad)</td>
+                        <td class = "align-middle"> @Html.DisplayFor(modelItem => item.Weight)</td>
+                        <td class = "align-middle"> @Html.DisplayFor(modelItem => item.ThreadDept)</td>
+                        <td class = "align-middle"> @Html.DisplayFor(modelItem => item.AprovedRimWidth)</td>
+                         <td class = "align-middle"> @Html.DisplayFor(modelItem => item.Cost)</td>
+
+
+                        <td class = "align-middle" style = "min-width:200px"> 
+                            <a class = "btn btn-outline-primary"><i class = "bi bi-pencil-square"></i>Edit</a>
+                            <a class = "btn btn-danger"><i class = "bi bi-trash"></i>Delete</a>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+            
+
+
+        </table>
+    </div>
+
+</div>
+<div style = "position: fixed; right: 25px; bottom:25px"class ="text-white">
+    <a asp-controller="" asp-action ="Create" class = "btn btn-danger"> <i class = "btn-outline-info bi-plus-circle"></i> Add New </a>
+</div>

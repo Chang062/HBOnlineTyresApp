@@ -34,5 +34,11 @@ namespace HBOnlineTyresApp.Controllers
             var productDetails = await _service.GetInventoryByIdAsync(id);
             return View(productDetails);
         }
+
+        //CREATE
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }

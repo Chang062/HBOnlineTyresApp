@@ -122,7 +122,7 @@
                                  @if (Model.Quantity >0) 
                                 {
                                 <a class="btn btn-outline-danger float-right" asp-action = "Products"> Back to list</a>
-                                <a class="btn btn-success text-white" style= "padding-left: 100px"><i class="bi bi-cart-plus"></i> Add to Cart (Price @Model.Specifications.Cost.ToString("c"))</a>
+                                <a class="btn btn-success text-white"><i class="bi bi-cart-plus"></i> Add to Cart (Price @Model.Specifications.Cost.ToString("c"))</a>
                                 }
                                 else{
                                       <a class="btn btn-outline-danger float-right" asp-action = "Products"> Back to list</a>
