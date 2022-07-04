@@ -1,4 +1,5 @@
 ﻿using HBOnlineTyresApp.Data.Base;
+using HBOnlineTyresApp.Data.ViewModels;
 using HBOnlineTyresApp.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +25,14 @@ namespace HBOnlineTyresApp.Data.Services
                 
 
 
+        }
+
+        public async Task<NewInventoryDropdownVM> GetNewInventoryDropdownValues()
+        {
+            var response = new NewInventoryDropdownVM();
+            response.Specifications = await _context.Specifications.OrderBy(n=> n.Tyre.Name).ToListAsync();
+
+            return response;
         }
     }
 }

@@ -4,11 +4,12 @@ namespace HBOnlineTyresApp.Data.ViewModels
 {
     public class NewInventoryVM
     {
-        [Required (ErrorMessage = "this field cannot be left empty")]
-        [Display(Description ="Model")]
+        [Required (ErrorMessage = "This field cannot be left empty")]
+        [Display(Name ="Specification Identification Number")]
         public int SpecsId { get; set; }
-        [Required(ErrorMessage = "this field cannot be left empty")]
-        [Display(Description = "In Stock ")]
+        [Required(ErrorMessage = "This field cannot be left empty")]
+        [Display(Name = "In Stock ")]
+        
         public int Quantity { get; set; }
     }
 }

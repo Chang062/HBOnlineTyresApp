@@ -11,7 +11,8 @@
 
         <table class ="table">
             <thead class = "text-center">
-               <tr class="card-header text-white bg-danger">                    
+               <tr class="card-header text-white bg-danger">
+                  <th> @Html.DisplayNameFor(model => model.Id)</th>
                   <th> @Html.DisplayNameFor(model => model.Tyre.Name)</th>
                   <th> @Html.DisplayNameFor(model => model.Tyre.category.Name)</th>
                   <th> @Html.DisplayNameFor(model => model.Tyre.Manufacturer.Name)</th>
@@ -36,6 +37,7 @@
                 @foreach (var item in Model)
                 {
                     <tr>
+                        <td class = "align-middle">  @Html.DisplayFor(modelItem => item.Id)</td>
                         <td class = "align-middle">  @Html.DisplayFor(modelItem => item.Tyre.Name)</td>
                         <td class = "align-middle">  @Html.DisplayFor(modelItem => item.Tyre.category.Name)</td>
                         <td class = "align-middle "> @Html.DisplayFor(modelItem => item.Tyre.Manufacturer.Name)</td>

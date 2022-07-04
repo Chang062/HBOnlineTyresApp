@@ -7,6 +7,7 @@ namespace HBOnlineTyresApp.Models
     public class Specification:IEntityBase
     {
         [Key]
+        [Display(Name = "ID")]
         public int Id { get; set; }
         [Display(Name = "Tyre ID")]
         public int TyreId { get; set; }

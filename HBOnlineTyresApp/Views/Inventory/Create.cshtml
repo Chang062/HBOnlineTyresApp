@@ -20,7 +20,7 @@
                          <div class="col-md-6">
                             <div class="mb-3">
                                 <label asp-for="SpecsId" class="control-label"></label>
-                                <select asp-for="SpecsId" class="form-control"></select>
+                                <select asp-for="SpecsId" class="form-control" asp-items ="ViewBag.SpecsId"></select>
                                 <span asp-validation-for="SpecsId" class="text-danger"></span>
                             </div>
                           

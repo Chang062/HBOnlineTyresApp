@@ -1,6 +1,7 @@
 ﻿using HBOnlineTyresApp.Data;
 using HBOnlineTyresApp.Data.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace HBOnlineTyresApp.Controllers
@@ -36,8 +37,10 @@ namespace HBOnlineTyresApp.Controllers
         }
 
         //CREATE
-        public IActionResult Create()
+        public async Task< IActionResult> Create()
         {
+            var dropdownData = await _service.GetNewInventoryDropdownValues();
+            ViewBag.SpecsId = new SelectList(dropdownData.Specifications, "Id", "Id");
             return View();
         }
     }
