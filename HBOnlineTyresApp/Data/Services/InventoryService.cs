@@ -30,7 +30,7 @@ namespace HBOnlineTyresApp.Data.Services
         public async Task<NewInventoryDropdownVM> GetNewInventoryDropdownValues()
         {
             var response = new NewInventoryDropdownVM();
-            response.Specifications = await _context.Specifications.OrderBy(n=> n.Tyre.Name).ToListAsync();
+            response.Specs = await _context.Specifications.Include(t=> t.Tyre).Select(q=> new {Id= q.Id, Name= $"{q.Tyre.Name}{q.Size}"}).ToListAsync();
 
             return response;
         }

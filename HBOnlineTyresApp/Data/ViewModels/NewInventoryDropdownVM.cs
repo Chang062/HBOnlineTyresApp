@@ -6,8 +6,10 @@ namespace HBOnlineTyresApp.Data.ViewModels
     {
         public NewInventoryDropdownVM()
         {
-            Specifications = new List<Specification>();
+            Specs = new List<Specification>();
+          
         }
-        public List <Specification> Specifications{ get; set; }
+        public List <Specification> Specs{ get; set; }
+        
     }
 }

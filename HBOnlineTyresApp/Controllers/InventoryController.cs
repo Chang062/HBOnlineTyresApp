@@ -40,7 +40,7 @@ namespace HBOnlineTyresApp.Controllers
         public async Task< IActionResult> Create()
         {
             var dropdownData = await _service.GetNewInventoryDropdownValues();
-            ViewBag.SpecsId = new SelectList(dropdownData.Specifications, "Id", "Id");
+            ViewBag.SpecsId = new SelectList(dropdownData.Specs, "Id", "Name");
             return View();
         }
     }
