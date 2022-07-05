@@ -1,6 +1,7 @@
 ﻿using HBOnlineTyresApp.Data.Base;
 using HBOnlineTyresApp.Data.ViewModels;
 using HBOnlineTyresApp.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace HBOnlineTyresApp.Data.Services
@@ -23,16 +24,25 @@ namespace HBOnlineTyresApp.Data.Services
 
             return productDetails;
                 
-
-
         }
 
-        public async Task<NewInventoryDropdownVM> GetNewInventoryDropdownValues()
+        /* public async Task<NewInventoryDropdownVM> GetNewInventoryDropdownValues()
+         {
+             var response = new NewInventoryDropdownVM();
+
+             // response.Specs = await _context.Specifications.Include(t=> t.Tyre).Select(q=> new {Id= q.Id, Size= $"{q.Tyre.Name} {q.Size}"}).ToListAsync();
+             //response.Specs = await _context.Specifications.ToListAsync();
+             response.Specs = await _context.Specifications.Include(q=> q.Tyre).ToListAsync();
+
+             return response;
+         }*/
+        public async Task<SelectList> GetNewInventoryDropdownValues()
         {
-            var response = new NewInventoryDropdownVM();
-            response.Specs = await _context.Specifications.Include(t=> t.Tyre).Select(q=> new {Id= q.Id, Name= $"{q.Tyre.Name}{q.Size}"}).ToListAsync();
-
-            return response;
+          
+            var specs = await _context.Specifications.Include(t => t.Tyre).Select(q => new { Id = q.Id, Name = $"{q.Tyre.Manufacturer.Name}|{q.Tyre.Name }|{q.Size}" }).ToListAsync();
+            return new SelectList(specs, "Id", "Name");
         }
+
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using HBOnlineTyresApp.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace HBOnlineTyresApp.Data.ViewModels
 {
@@ -10,6 +11,8 @@ namespace HBOnlineTyresApp.Data.ViewModels
         public int SpecsId { get; set; }
         [Required(ErrorMessage = "This field cannot be left empty")]
         [Display(Name = "In Stock ")]
+        
+        public Specification? specifications { get; set; }
         
         public int Quantity { get; set; }
     }
