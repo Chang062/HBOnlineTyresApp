@@ -27,6 +27,22 @@ namespace HBOnlineTyresApp.Controllers
             var data = await _service.GetAsync(n=> n.Specifications.Tyre.Manufacturer, p=> p.Specifications.Tyre.category);
             return View(data);
         }
+        //Filter
+        public async Task<IActionResult> Filter(string searchString)
+
+        {
+
+            var data = await _service.GetAsync(n => n.Specifications.Tyre.Manufacturer, p => p.Specifications.Tyre.category);
+
+            if(!string.IsNullOrEmpty(searchString))
+            {
+                var filteredResults = data.Where(l=> l.Specifications.Tyre.Name.Contains(searchString) 
+                || l.Specifications.Tyre.Manufacturer.Name.Contains(searchString) || l.Specifications.Tyre.category.Name.Contains(searchString)
+                || l.Specifications.Size.Contains(searchString)).ToList();
+                return View("Products", filteredResults);
+            }
+            return View("Products", data);
+        }
 
         //show product details
 

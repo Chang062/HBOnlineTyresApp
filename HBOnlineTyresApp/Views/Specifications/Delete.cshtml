@@ -1,0 +1,111 @@
+﻿@model NewSpecificationVM
+@using HBOnlineTyresApp.Data.ViewModels
+ 
+@{
+    ViewData["Title"] = "Delete Specification";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h4>Delete Specification</h4>
+        </p>
+
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Delete">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="TyreId" class="control-label"></label>
+                                <select asp-for="TyreId" class="form-control" asp-items="ViewBag.TyreId"></select>
+                                <span asp-validation-for="TyreId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Size" class="control-label"></label>
+                                <input asp-for="Size" placeholder ="205/55/R17" class="form-control" readonly/>
+                                <span asp-validation-for="Size" class="text-danger"></span>
+                            </div>
+                           
+                            <div class="form-group">
+                                <label asp-for="RimSize" class="control-label"></label>
+                                <input asp-for="RimSize" placeholder="17 inches" class="form-control" readonly />
+                                <span asp-validation-for="RimSize" class="text-danger"></span>
+                            </div>
+                             <div class="form-group">
+                                <label asp-for="ServiceDescription" class="control-label"></label>
+                                <input asp-for="ServiceDescription" placeholder="87V" class="form-control" readonly/>
+                                <span asp-validation-for="ServiceDescription" class="text-danger"></span>
+                            </div>
+                             <div class="form-group">
+                                <label asp-for="SideWall" class="control-label"></label>
+                                <input asp-for="SideWall" placeholder="BSW" class="form-control" readonly/>
+                                <span asp-validation-for="SideWall" class="text-danger"></span>
+                            </div>
+                             <div class="form-group">
+                                <label asp-for="Diameter" class="control-label"></label>
+                                <input asp-for="Diameter" placeholder="25.1 inches" class="form-control" readonly/>
+                                <span asp-validation-for="Diameter" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                             <div class="form-group">
+                                <label asp-for="MaxPSI" class="control-label"></label>
+                                <input asp-for="MaxPSI" placeholder="44 lbs" class="form-control" readonly/>
+                                <span asp-validation-for="MaxPSI" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="SectionWidth" class="control-label"></label>
+                                <input asp-for="SectionWidth" placeholder="" class="form-control" readonly/>
+                                <span asp-validation-for="SectionWidth" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="MaxLoad" class="control-label"></label>
+                                <input asp-for="MaxLoad" placeholder="1300 lbs" class="form-control" readonly/>
+                                <span asp-validation-for="MaxLoad" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Weight" class="control-label"></label>
+                                <input asp-for="Weight" placeholder="20.23 lbs" class="form-control" readonly/>
+                                <span asp-validation-for="Weight" class="text-danger"></span>
+                            </div>
+                             <div class="form-group">
+                                <label asp-for="ThreadDept" class="control-label"></label>
+                                <input asp-for="ThreadDept" placeholder="10/32 inches" class="form-control" readonly/>
+                                <span asp-validation-for="ThreadDept" class="text-danger"></span>
+                            </div>
+                             <div class="form-group">
+                                <label asp-for="AprovedRimWidth" class="control-label"></label>
+                                <input asp-for="AprovedRimWidth" placeholder="5.50[6.00]-7.00 inches" class="form-control" readonly/>
+                                <span asp-validation-for="AprovedRimWidth" class="text-danger"></span>
+                            </div>
+                             <div class="form-group">
+                                <label asp-for="Cost" class="control-label"></label>
+                                <input asp-for="Cost" placeholder="15000" class="form-control" readonly/>
+                                <span asp-validation-for="Cost" class="text-danger"></span>
+                            </div>
+                           
+                        </div>
+                        
+                    </div>
+
+                    <div class="col-md-4 offset-4 text-center">
+                        <img width="100%" id="ImageUrlPreview" />
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Delete" class="btn btn-outline-success float-right" />
+                        <a class="btn btn-outline-secondary" asp-action="Index">Show all</a>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+

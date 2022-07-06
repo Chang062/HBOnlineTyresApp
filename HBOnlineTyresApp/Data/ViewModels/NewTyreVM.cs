@@ -5,6 +5,7 @@ namespace HBOnlineTyresApp.Data.ViewModels
 {
     public class NewTyreVM
     {
+        public int Id { get; set; }
 
         [Display(Name = "Model")]
         [Required(ErrorMessage = "This field cannot be left empty")]
