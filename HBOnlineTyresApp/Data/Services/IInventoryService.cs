@@ -8,8 +8,7 @@ namespace HBOnlineTyresApp.Data.Services
     public interface IInventoryService:IEntityBaseRepository<Inventory>
     {
         Task<Inventory> GetInventoryByIdAsync(int id);
-        //  Task<NewInventoryDropdownVM> GetNewInventoryDropdownValues();
-        Task<SelectList> GetNewInventoryDropdownValues();
+         Task<SelectList> GetNewInventoryDropdownValues();
 
     }
 }

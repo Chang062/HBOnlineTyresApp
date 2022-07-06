@@ -18,5 +18,10 @@ namespace HBOnlineTyresApp.Controllers
             var data = await _service.GetAsync(t=> t.Tyre, c=> c.Tyre.category, m=> m.Tyre.Manufacturer);
             return View(data);
         }
+        public async Task<IActionResult> Create()
+        {
+            ViewBag.TyreId = await _service.GetDropdownValues();
+            return View();
+        }
     }
 }

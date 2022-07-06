@@ -26,20 +26,10 @@ namespace HBOnlineTyresApp.Data.Services
                 
         }
 
-        /* public async Task<NewInventoryDropdownVM> GetNewInventoryDropdownValues()
-         {
-             var response = new NewInventoryDropdownVM();
-
-             // response.Specs = await _context.Specifications.Include(t=> t.Tyre).Select(q=> new {Id= q.Id, Size= $"{q.Tyre.Name} {q.Size}"}).ToListAsync();
-             //response.Specs = await _context.Specifications.ToListAsync();
-             response.Specs = await _context.Specifications.Include(q=> q.Tyre).ToListAsync();
-
-             return response;
-         }*/
         public async Task<SelectList> GetNewInventoryDropdownValues()
         {
           
-            var specs = await _context.Specifications.Include(t => t.Tyre).Select(q => new { Id = q.Id, Name = $"{q.Tyre.Manufacturer.Name}|{q.Tyre.Name }|{q.Size}" }).ToListAsync();
+            var specs = await _context.Specifications.Include(t => t.Tyre).Select(q => new { Id = q.Id, Name = $"{q.Tyre.Manufacturer.Name}  {q.Tyre.Name }  {q.Size}" }).ToListAsync();
             return new SelectList(specs, "Id", "Name");
         }
 

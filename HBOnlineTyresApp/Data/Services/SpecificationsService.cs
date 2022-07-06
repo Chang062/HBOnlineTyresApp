@@ -1,5 +1,6 @@
 ﻿using HBOnlineTyresApp.Data.Base;
 using HBOnlineTyresApp.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -12,6 +13,13 @@ namespace HBOnlineTyresApp.Data.Services
         {
             _context = context;
         }
+
+        public async Task<SelectList> GetDropdownValues()
+        {
+            var dropdownList = await _context.Tyres.OrderBy(x => x.Name).ToListAsync();
+            return new SelectList(dropdownList, "Id", "Name");
+        }
+
         public  async Task<Specification> GetSpecificationsByIdAsync(int id)
         {
            var details = _context.Specifications.Include(t => t.Tyre)

@@ -7,10 +7,9 @@ namespace HBOnlineTyresApp.Data.ViewModels
         public NewTyreDropdownVM()
         {
             category = new List<Category>();
-            manufacturers = new List<Manufacturer> ();
+            manufacturers = new List<Manufacturer>();
         }
         public List<Category> category { get; set; }
         public List<Manufacturer> manufacturers { get; set; }
     }
-
 }

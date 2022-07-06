@@ -17,7 +17,7 @@ namespace HBOnlineTyresApp.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var data = await _service.GetAsync(n => n.Manufacturer);
+            var data = await _service.GetAsync(n => n.Manufacturer, c => c.category);
             return View(data);
         }
 
