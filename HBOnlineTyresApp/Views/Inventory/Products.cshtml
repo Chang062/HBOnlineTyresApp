@@ -44,7 +44,9 @@
                                 }
                                 else
                                 {
-                                <span class="badge bg-danger text-white">OUT OF STOCK</span>
+                                <span class="badge bg-danger text-white">OUT OF STOCK
+                                    <p class="card-text"><b> Back in stock soon! </b></p>
+                                </span>
                                 }
                           
                             </p>
@@ -57,7 +59,7 @@
                                  @if (item.Quantity >0) 
                                 {
                                 <a class="btn btn-outline-danger float-right" asp-action = "Details" asp-route-id ="@item.Id"><i class="bi bi-eye-fill"></i> Show Details</a>
-                                <a class="btn btn-success text-white"><i class="bi bi-cart-plus"></i> Add to Cart (Price @item.Specifications.Cost.ToString("c"))</a>
+                                <a class="btn btn-primary text-white"><i class="bi bi-cart-plus"></i> Add to Cart (Price @item.Specifications.Cost.ToString("c"))</a>
                                 }
                                 else{
                                     <a class="btn btn-outline-danger float-right" asp-action = "Details" asp-route-id ="@item.Id"><i class="bi bi-eye-fill"></i> Show Details</a>

@@ -1,0 +1,53 @@
+﻿@using HBOnlineTyresApp.Data.ViewModels
+@model NewInventoryVM
+
+@{
+    ViewData["Title"] = "DELETE";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h4>DELETE ENTRY</h4>
+        </p>
+
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Delete">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="row">
+                         <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="SpecsId" class="control-label"></label>
+                                <select asp-for="SpecsId" class="form-control" asp-items ="ViewBag.SpecsId"></select>
+                                <span asp-validation-for="SpecsId" class="text-danger"></span>
+                            </div>
+                          
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="Quantity" class="control-label"></label>
+                                <input asp-for="Quantity" class="form-control" />
+                                <span asp-validation-for="Quantity" class="text-danger"></span>
+                            </div>
+                         
+                        </div>
+                       
+                     
+                    </div>
+
+                   <div class="mb-3">
+                        <input type="submit" value="Delete" class="btn btn-outline-success float-right" />
+                        <a class="btn btn-outline-secondary" asp-action="Index">Show all</a>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

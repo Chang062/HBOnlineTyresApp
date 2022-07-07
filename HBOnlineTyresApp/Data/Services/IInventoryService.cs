@@ -9,6 +9,9 @@ namespace HBOnlineTyresApp.Data.Services
     {
         Task<Inventory> GetInventoryByIdAsync(int id);
          Task<SelectList> GetNewInventoryDropdownValues();
+        Task AddNewInventoryAsync(NewInventoryVM inventory);
+        Task UpdateInventoryAsync(NewInventoryVM inventory);
+        Task DeleteInventoryAsync(NewInventoryVM inventory);
 
     }
 }

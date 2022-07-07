@@ -3,6 +3,7 @@ using HBOnlineTyresApp.Data.ViewModels;
 using HBOnlineTyresApp.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace HBOnlineTyresApp.Data.Services
 {
@@ -12,6 +13,32 @@ namespace HBOnlineTyresApp.Data.Services
         public InventoryService(AppDbContext context):base(context)
         {
             _context = context;
+        }
+
+        public async Task AddNewInventoryAsync(NewInventoryVM inventory)
+        {
+            var newInventory = new Inventory()
+            {
+                SpecsId = inventory.SpecsId,
+                Quantity = inventory.Quantity,
+            };
+            _context.AddAsync(newInventory);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteInventoryAsync(NewInventoryVM inventory)
+        {
+            var dbInv = await _context.Inventories.FirstOrDefaultAsync(q => q.Id == inventory.Id);
+            if(dbInv != null)
+            {
+                inventory.SpecsId = dbInv.SpecsId;
+                inventory.Quantity = dbInv.Quantity;
+
+                EntityEntry entityentry = _context.Entry<Inventory>(dbInv);
+                entityentry.State = EntityState.Deleted;
+            }
+
+            await _context.SaveChangesAsync();
         }
 
         public async Task<Inventory> GetInventoryByIdAsync(int id)
@@ -33,6 +60,16 @@ namespace HBOnlineTyresApp.Data.Services
             return new SelectList(specs, "Id", "Name");
         }
 
+        public async Task UpdateInventoryAsync(NewInventoryVM inventory)
+        {
+            var dbInventory = await _context.Inventories.FirstOrDefaultAsync(q => q.Id == inventory.Id);
+            if (dbInventory != null)
+            {
+                dbInventory.SpecsId = inventory.SpecsId;
+                dbInventory.Quantity = inventory.Quantity;
 
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }
