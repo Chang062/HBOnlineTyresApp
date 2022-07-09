@@ -27,15 +27,16 @@
                             <p class="card-text"><b>Size:   </b>@Model.Specifications.Size</p>
                             <p class="card-text"><b>Manufacturer: </b>@Model.Specifications.Tyre.Manufacturer.Name</p>
                             <p class="card-text"><b>Category: </b>@Model.Specifications.Tyre.category.Name</p>
+                          <p class="card-text"><b>Price: </b><i class="bi bi-currency-dollar"></i> @Model.Specifications.Cost.ToString("c")</p>
                             <p class="card-text ">
                                 <b>Status: </b>
-                                  @if (Model.Quantity > 12)
+                                  @if (@Model.Quantity > 12)
                                 {
                                     <span class="badge bg-success text-white">IN STOCK
                                         <p class="card-text"><b>Available: </b>@Model.Quantity</p>
                                     </span>
                                 }
-                                else if (Model.Quantity <13 && Model.Quantity > 0) 
+                                else if (@Model.Quantity <13 && @Model.Quantity > 0) 
                                 {
                                      <span class="badge bg-warning text-white">LOW STOCK
                                         <p class="card-text"><b> Only </b>@Model.Quantity <b> left in stock. Order Soon </b></p>
@@ -43,7 +44,9 @@
                                 }
                                 else
                                 {
-                                <span class="badge bg-danger text-white">OUT OF STOCK</span>
+                                <span class="badge bg-danger text-white">OUT OF STOCK
+                                    <p class="card-text"><b> Back in stock soon! </b></p>
+                                </span>
                                 }
                           
                             </p>
@@ -119,11 +122,11 @@
                             <p class="card-text">
                                  @if (Model.Quantity >0) 
                                 {
-                                <a class="btn btn-outline-danger float-right" asp-action = "Products"> Back to list</a>
-                                <a class="btn btn-success text-white"><i class="bi bi-cart-plus"></i> Add to Cart (Price @Model.Specifications.Cost.ToString("c"))</a>
+                                <a class="btn btn-outline-danger float-end" asp-action = "Products"> Back to list</a>
+                                <a class="btn btn-success text-white"><i class="bi bi-cart-plus "></i> Add to Cart</a>
                                 }
                                 else{
-                                      <a class="btn btn-outline-danger float-right" asp-action = "Products"> Back to list</a>
+                                      <a class="btn btn-outline-danger float-end" asp-action = "Products"> Back to list</a>
                                 }
                             </p>
                         </div>
