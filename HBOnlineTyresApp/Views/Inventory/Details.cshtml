@@ -123,7 +123,7 @@
                                  @if (Model.Quantity >0) 
                                 {
                                 <a class="btn btn-outline-danger float-end" asp-action = "Products"> Back to list</a>
-                                <a class="btn btn-success text-white"><i class="bi bi-cart-plus "></i> Add to Cart</a>
+                                <a class="btn btn-success text-white" asp-controller="Orders" asp-action="AddToShoppingCart" asp-route-id= "@Model.Id"><i class="bi bi-cart-plus "></i> Add to Cart</a>
                                 }
                                 else{
                                       <a class="btn btn-outline-danger float-end" asp-action = "Products"> Back to list</a>

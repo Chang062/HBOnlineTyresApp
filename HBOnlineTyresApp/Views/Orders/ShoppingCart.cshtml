@@ -1,0 +1,65 @@
+﻿@using HBOnlineTyresApp.Data.ViewModels
+@model ShoppingCartVM
+
+@{
+    ViewData["Title"] = "Shopping Cart Summary";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <div class=" text-center">
+            <h2>Shopping Cart Summary</h2>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th> </th>
+                    <th>Model </th>
+                    <th>Series </th> 
+                    <th>Qty </th>
+                    <th>Price </th>
+                    <th>Subtotal(15% GCT) </th>
+                    <th> </th> 
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ShoppingCart.ShopingCartItems)
+                {
+                    <tr>
+                        <td class="align-middle"> <img src = "@item.Inventory.Specifications.Tyre.ImageURL" alt = "An Image is supposed to be here" style = "max-width: 100px"></td>
+                        <td class="align-middle">@item.Inventory.Specifications.Tyre.Name</td>
+                        <td class="align-middle">@item.Inventory.Specifications.Size</td>
+                        <td class="align-middle">@item.Amount</td>
+                        <td class="align-middle">@item.Inventory.Specifications.Cost.ToString("c")</td>
+                        <td class="align-middle">@((@item.Amount * item.Inventory.Specifications.Cost + (item.Amount * item.Inventory.Specifications.Cost*(.15))).ToString("c"))</td>
+                        <td class="align-middle">
+                            <a class=" text-danger" asp-controller="Orders" asp-action="RemoveItemFromShoppingCart" asp-route-id =@item.Inventory.Id>
+                                <i class="bi bi-cart-dash"></i></a>
+                           <a class="align-middle outline-info ">@item.Amount </a>
+                            <a class=" text-success" asp-controller="Orders" asp-action="AddToShoppingCart" asp-route-id =@item.Inventory.Id>
+                                <i class="bi bi-cart-plus"></i></a>
+                        </td>                                        
+                    </tr>
+                }
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4"></td>
+                    <td><b>Total:</b></td>
+                    <td>
+                        @Model.ShoppingCartTotal.ToString("c");
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="align-right">
+            <div class=" btn-group">
+                <a class=" btn btn-outline-success" asp-controller="Inventory" asp-action="Products" style="float-end">Add More Items</a>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -3,6 +3,7 @@ using HBOnlineTyresApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HBOnlineTyresApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220711140632_OrdersAndShoppingCart")]
+    partial class OrdersAndShoppingCart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -137,7 +139,7 @@ namespace HBOnlineTyresApp.Migrations
                     b.ToTable("OrderItems");
                 });
 
-            modelBuilder.Entity("HBOnlineTyresApp.Models.ShoppingCartItem", b =>
+            modelBuilder.Entity("HBOnlineTyresApp.Models.ShopingCartItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -159,7 +161,7 @@ namespace HBOnlineTyresApp.Migrations
 
                     b.HasIndex("InventoryId");
 
-                    b.ToTable("ShoppingCartItems");
+                    b.ToTable("ShopingCartItems");
                 });
 
             modelBuilder.Entity("HBOnlineTyresApp.Models.Specification", b =>
@@ -292,7 +294,7 @@ namespace HBOnlineTyresApp.Migrations
                     b.Navigation("Order");
                 });
 
-            modelBuilder.Entity("HBOnlineTyresApp.Models.ShoppingCartItem", b =>
+            modelBuilder.Entity("HBOnlineTyresApp.Models.ShopingCartItem", b =>
                 {
                     b.HasOne("HBOnlineTyresApp.Models.Inventory", "Inventory")
                         .WithMany()

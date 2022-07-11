@@ -1,4 +1,5 @@
 using HBOnlineTyresApp.Data;
+using HBOnlineTyresApp.Data.Cart;
 using HBOnlineTyresApp.Data.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,9 @@ builder.Services.AddScoped<IManufacturersService, ManufacturersService>();
 builder.Services.AddScoped<IInventoryService, InventoryService>();
 builder.Services.AddScoped<ITyresService, TyresService>();
 builder.Services.AddScoped<ISpecificationsService, SpecificationsService>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -28,6 +32,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
 
 app.UseAuthorization();
 
