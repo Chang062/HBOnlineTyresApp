@@ -10,8 +10,13 @@ namespace HBOnlineTyresApp.Data.Services
         public OrdersService(AppDbContext context)
         {
             _context = context;
-
         }
+
+        public Task<List<Order>> DeductFromInventory()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<Order>> GetOrdersByUserIdAsync(string userId)
         {
             var orders = await _context.Orders.Include(l=> l.OrderItems).ThenInclude(l=> l.Inventory.Specifications.Tyre)
@@ -22,6 +27,7 @@ namespace HBOnlineTyresApp.Data.Services
 
         public async Task StoreOrderAsync(List<ShoppingCartItem> items, string userId, string userEmailAddress)
         {
+            
             var order = new Order()
             {
                 UserId = userId,
@@ -42,7 +48,10 @@ namespace HBOnlineTyresApp.Data.Services
                 };
                 await _context.OrderItems.AddAsync(orderItem);
 
-               
+                item.Inventory.Quantity -= item.Amount;
+                ////var inventoryRecord = await _context.Inventories.AsNoTracking().FirstOrDefaultAsync(q => q.Id == item.Inventory.Id);
+                ////inventoryRecord.Quantity -= item.Amount;
+                ////_context.Update(inventoryRecord);
             }
             await _context.SaveChangesAsync();
         }
