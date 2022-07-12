@@ -14,6 +14,7 @@ builder.Services.AddScoped<IManufacturersService, ManufacturersService>();
 builder.Services.AddScoped<IInventoryService, InventoryService>();
 builder.Services.AddScoped<ITyresService, TyresService>();
 builder.Services.AddScoped<ISpecificationsService, SpecificationsService>();
+builder.Services.AddScoped<IOrdersService, OrdersService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
 builder.Services.AddSession();

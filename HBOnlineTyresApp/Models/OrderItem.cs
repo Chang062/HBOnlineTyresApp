@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HBOnlineTyresApp.Models
 {
@@ -10,7 +11,8 @@ namespace HBOnlineTyresApp.Models
         public double Price{ get; set; }
         public int InventoryId { get; set; }
         public virtual Inventory Inventory { get; set; }
-        public int OderId { get; set; }
+        public int OrderId { get; set; }
+        [ForeignKey ("OrderId")]
         public virtual Order Order { get; set; }
     }
 }
