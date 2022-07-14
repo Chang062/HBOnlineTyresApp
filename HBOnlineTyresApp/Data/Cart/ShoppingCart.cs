@@ -86,6 +86,21 @@ namespace HBOnlineTyresApp.Data.Cart
             return total;
         }
 
+        public double GetShoppingSubTotal()
+        {
+            var total = _context.ShoppingCartItems.Where(q => q.ShoppingCartId == ShoppingCartId)
+                .Select(q => q.Inventory.Specifications.Cost * q.Amount).Sum();
+            return total;
+        }
+        public double GetShoppingTaxTotal()
+        {
+            var total = _context.ShoppingCartItems.Where(q => q.ShoppingCartId == ShoppingCartId)
+                .Select(q => q.Inventory.Specifications.Cost * q.Amount*(.15)).Sum();
+            return total;
+        }
+
+
+
         public async Task ClearShoppingCartAsync()
         {
             var items = await _context.ShoppingCartItems.Where(q => q.ShoppingCartId == ShoppingCartId).ToListAsync();

@@ -25,7 +25,10 @@ namespace HBOnlineTyresApp.Controllers
             var response = new ShoppingCartVM()
             {
                 ShoppingCart = _shoppingCart,
+                
                 ShoppingCartTotal = _shoppingCart.GetShoppingCartTotal(),
+                ShoppingSubTotal = _shoppingCart.GetShoppingSubTotal(),
+                ShoppingTaxTotal = _shoppingCart.GetShoppingTaxTotal(),
 
             };
             return View(response);
