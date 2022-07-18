@@ -12,10 +12,7 @@ namespace HBOnlineTyresApp.Data.Services
             _context = context;
         }
 
-        public Task<List<Order>> DeductFromInventory()
-        {
-            throw new NotImplementedException();
-        }
+      
 
         public async Task<List<Order>> GetOrdersByUserIdAsync(string userId)
         {

@@ -26,7 +26,7 @@ namespace HBOnlineTyresApp.Controllers
         {
                      
             var data = await _service.GetAsync(n=> n.Specifications.Tyre.Manufacturer, p=> p.Specifications.Tyre.category);
-            return View(data);
+            return View(data.OrderBy(l=> l.Specifications.Tyre.Name));
         }
         //Filter
         public async Task<IActionResult> Filter(string searchString)

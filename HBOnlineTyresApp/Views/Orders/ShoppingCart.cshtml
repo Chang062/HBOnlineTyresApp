@@ -13,33 +13,35 @@
 
         <table class="table">
             <thead>
-                <tr class = "card-header text-white bg-danger" style="font-family:georgia,garamond,serif;font-size:16px;font-style:italic;">
+                <tr class="card-header text-white bg-info" style="font-family:georgia,garamond,serif;font-size:16px;font-style:italic;">
                     <th style="border-top:none; border-bottom:none"> </th>
                     <th style="border-top:none; border-bottom:none">Model </th>
-                    <th style="border-top:none; border-bottom:none">Series </th> 
+                    <th style="border-top:none; border-bottom:none">Series </th>
                     <th style="border-top:none; border-bottom:none">Qty </th>
                     <th style="border-top:none; border-bottom:none">Price </th>
                     <th style="border-top:none; border-bottom:none">Subtotal </th>
-                   
+
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model.ShoppingCart.ShopingCartItems)
                 {
                     <tr>
-                        <td class="align-middle" style="border-top:none; border-bottom:none"><img src = "@item.Inventory.Specifications.Tyre.ImageURL" alt = "An Image is supposed to be here" style = "max-width: 100px; "></td>
+                        <td class="align-middle" style="border-top:none; border-bottom:none"><img src="@item.Inventory.Specifications.Tyre.ImageURL" alt="An Image is supposed to be here" style="max-width: 100px; "></td>
                         <td class="align-middle" style="border-top:none; border-bottom:none">@item.Inventory.Specifications.Tyre.Name</td>
                         <td class="align-middle" style="border-top:none; border-bottom:none">@item.Inventory.Specifications.Size</td>
-                         <td class="align-middle" style="border-top:none; border-bottom:none">
-                            <a class=" text-danger" asp-controller="Orders" asp-action="RemoveItemFromShoppingCart" asp-route-id =@item.Inventory.Id>
-                                <i class="bi bi-cart-dash"></i></a>
+                        <td class="align-middle" style="border-top:none; border-bottom:none">
+                            <a class=" text-danger" asp-controller="Orders" asp-action="RemoveItemFromShoppingCart" asp-route-id=@item.Inventory.Id>
+                                <i class="bi bi-cart-dash"></i>
+                            </a>
                             <a>@item.Amount </a>
-                            <a class=" text-success" asp-controller="Orders" asp-action="AddToShoppingCart" asp-route-id =@item.Inventory.Id>
-                                <i class="bi bi-cart-plus"></i></a>
+                            <a class=" text-success" asp-controller="Orders" asp-action="AddToShoppingCart" asp-route-id=@item.Inventory.Id>
+                                <i class="bi bi-cart-plus"></i>
+                            </a>
                         </td>
                         <td class="align-middle" style="border-top:none; border-bottom:none">@item.Inventory.Specifications.Cost.ToString("c")</td>
                         <td class="align-middle" style="border-top:none; border-bottom:none">@((@item.Amount * item.Inventory.Specifications.Cost).ToString("c"))</td>
-                                                            
+
                     </tr>
                 }
 
@@ -47,21 +49,21 @@
             <tfoot>
                 <tr>
                     <td colspan="4" style="border-top:none; border-bottom:none"></td>
-                     <td style="border-top:none; border-bottom:none"><b>Subtotal:</b></td>
+                    <td style="border-top:none; border-bottom:none"><b>Subtotal:</b></td>
                     <td style="border-top:none; border-bottom:none">
                         @Model.ShoppingSubTotal.ToString("c");
                     </td>
-                    
+
                 </tr>
 
-                 <tr>
+                <tr>
                     <td colspan="4" style="border-top:none; border-bottom:none"></td>
-                    <td style="border-top:none; border-bottom:none"><b>Total Tax (15%):</b></td>
+                    <td style="border-top:none; border-bottom:none"><b>GCT:</b></td>
                     <td style="border-top:none; border-bottom:none">
                         @Model.ShoppingTaxTotal.ToString("c");
                     </td>
-                 </tr>
-                 <tr>
+                </tr>
+                <tr>
                     <td colspan="4" style="border-top:none; border-bottom:none"></td>
                     <td style="border-top:none; border-bottom:none"><b>Grand Total:</b></td>
                     <td style="border-top:none; border-bottom:none">
@@ -74,12 +76,61 @@
             </tfoot>
         </table>
 
-      
-            <div class=" mb-3">
-                 <a class=" btn btn-outline-primary float-end" asp-action="CompleteOrder">Check Out</a>
-                <a class=" btn btn-outline-success" asp-controller="Inventory" asp-action="Products">Add More Items</a>
-            </div>
-        
+
+        <div class=" mb-3">
+            @*<a class=" btn btn-outline-primary float-end" asp-action="CompleteOrder">Check Out</a>*@
+            <div id="paypal-btn" class=" float-end"> </div>
+            <span style="padding:10px"></span>
+            <a class=" btn btn-outline-success " asp-controller="Inventory" asp-action="Products">Add More Items</a>
+        </div>
+
     </div>
 
 </div>
+
+@section Scripts{
+
+    <script src = "https://www.paypalobjects.com/api/checkout.js"></script>
+
+    <script>
+
+    let _total = @Html.Raw(@Model.ShoppingCartTotal);
+        //configure environment
+    paypal.Button.render({
+    env: 'sandbox',
+    client: {
+        sandbox: 'AQqmHD7TEQNMCywozB6XEkCB4zHqIPnwtmz1a3g3qtX2Z6QbPsT8Qhr9rlbl4a-wS1ILwV6fIyLFubcF'
+    },
+    //customize button
+    locale: 'en_US',
+    style: {
+        size: 'medium',
+        color: 'blue',
+        shape: 'pill'
+    },
+    commit: true,
+    //set up payment
+        payment: function(data, actions) { 
+            return actions.payment.create({
+                transactions: [{
+                    amount: {
+                        total: _total,
+                        currency: 'USD'
+                    }
+
+                }]
+            });
+        },
+
+    //Execute payment
+    onAuthorize:function(data, actions) { 
+        return actions.payment.execute().then(function() {
+            var url = '@Url.Action("CompleteOrder", "Orders", new { })';
+            window.location.href = url;
+        });
+        }
+
+    }, '#paypal-btn');
+
+    </script>
+}

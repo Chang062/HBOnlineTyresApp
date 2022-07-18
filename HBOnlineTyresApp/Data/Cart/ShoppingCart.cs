@@ -7,7 +7,7 @@ namespace HBOnlineTyresApp.Data.Cart
     {
         public AppDbContext _context { get; set; }
         public string ShoppingCartId { get; set; }
-        public string Message { get; set; } = string.Empty;
+       
 
         public List<ShoppingCartItem> ShopingCartItems {get; set;}
 
