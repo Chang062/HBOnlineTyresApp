@@ -1,4 +1,6 @@
-﻿using HBOnlineTyresApp.Models;
+﻿using HBOnlineTyresApp.Data.Static;
+using HBOnlineTyresApp.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace HBOnlineTyresApp.Data
 {
@@ -337,6 +339,50 @@ namespace HBOnlineTyresApp.Data
 
                     });
                     context.SaveChanges();
+                }
+
+            }
+        }
+
+        public static async Task SeedUsersAndRolesAsync(IApplicationBuilder applicationBuilder)
+        {
+            using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+            {
+                //Roles
+                var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+                if(!await roleManager.RoleExistsAsync(UserRoles.Admin))
+                  await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+                if (!await roleManager.RoleExistsAsync(UserRoles.User))
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+
+                //Users
+                var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+                var adminUser = await userManager.FindByEmailAsync("admin@hbonlinetyres.com");
+                if (adminUser == null)
+                {
+                    var newAdminUser = new ApplicationUser()
+                    {
+                        FName = "Administrator User",
+                        UserName = "Administrator",
+                        Email = "admin@hbonlinetyres.com",
+                        EmailConfirmed = true,
+                    };
+                    await userManager.CreateAsync(newAdminUser, "Aug@2022");
+                    await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
+                }
+                var appUser = await userManager.FindByEmailAsync("user@hbonlinetyres.com");
+                if(appUser == null)
+                {
+                    var newAppUser = new ApplicationUser()
+                    {
+                        FName = "Application User",
+                        UserName = "Test-User",
+                        Email = "user@hbonlinetyres.com",
+                        EmailConfirmed = true,
+                    };
+                    await userManager.CreateAsync(newAppUser, "Aug@2022");
+                    await userManager.AddToRoleAsync(newAppUser, UserRoles.User);
                 }
 
             }
