@@ -36,9 +36,12 @@ namespace HBOnlineTyresApp.Controllers
         public async Task <RedirectToActionResult> AddToShoppingCart(int id)
         {
             var item = await _inventoryService.GetInventoryByIdAsync(id);
+            
             if(item != null)
             {
                 _shoppingCart.AddItemToCart(item);
+                
+                
             }
             return RedirectToAction(nameof(ShoppingCart));
 

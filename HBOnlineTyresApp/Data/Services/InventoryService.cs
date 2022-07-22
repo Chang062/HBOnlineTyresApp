@@ -22,7 +22,7 @@ namespace HBOnlineTyresApp.Data.Services
                 SpecsId = inventory.SpecsId,
                 Quantity = inventory.Quantity,
             };
-            _context.AddAsync(newInventory);
+            await  _context.AddAsync(newInventory);
             await _context.SaveChangesAsync();
         }
 
