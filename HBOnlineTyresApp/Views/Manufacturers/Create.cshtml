@@ -35,11 +35,13 @@
                     <textarea asp-for="Description" class = "form-control" rows = "6"></textarea>
                     <span asp-validation-for="Description" class = "text-danger"></span>
                 </div>
-
+                  @if(User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                     {
                 <div class ="mb-3">
                     <input type ="Submit" value ="Create" class = "btn btn-outline-success float-md-end" />
                     <a class =" btn btn-outline-secondary" asp-action ="Index">Show all Manufacturers</a>
                 </div>
+                     }
                 </form>
              
             </div>

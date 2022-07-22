@@ -62,10 +62,10 @@
                                  @if (item.Quantity >0) 
                                 {
                                 <a class="btn btn-outline-danger float-end" asp-action = "Details" asp-route-id ="@item.Id"><i class="bi bi-eye-fill"></i> Show Details</a>
-                                <a class="btn btn-primary text-white" asp-controller="Orders" asp-action="AddToShoppingCart" asp-route-id= "@item.Id" ><i class="bi bi-cart3"></i> Add to Cart</a>
+                                <a class="btn btn-success text-white float-start" asp-controller="Orders" asp-action="AddToShoppingCart" asp-route-id= "@item.Id" ><i class="bi bi-cart3"></i> Add to Cart</a>
                                 }
                                 else{
-                                    <a class="btn btn-outline-danger float-end" asp-action = "Details" asp-route-id ="@item.Id"><i class="bi bi-eye-fill"></i> Show Details</a>
+                                    <a class="btn btn-outline-danger float-start" asp-action = "Details" asp-route-id ="@item.Id"><i class="bi bi-eye-fill"></i> Show Details</a>
                                 }
                             </p>
                         </div>

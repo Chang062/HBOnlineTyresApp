@@ -8,7 +8,7 @@
 <div class="row">
     <div class="col-md-8 offset-2">
         <div class=" text-center">
-            <h2 style="font-family:georgia,garamond,serif; padding-bottom:20px">Shopping Cart Summary</h2>
+            <h2 style="font-family:Dubai; padding-bottom:20px">Shopping Cart Summary</h2>
         </div>
            @if(TempData["Error"] != null)
         {
@@ -19,7 +19,7 @@
 
         <table class="table">
             <thead>
-                <tr class="card-header text-white bg-info" style="font-family:georgia,garamond,serif;font-size:16px;font-style:italic;">
+                <tr class="card-header text-white bg-danger" style="font-family:georgia,garamond,serif;font-size:16px;font-style:italic;">
                     <th style="border-top:none; border-bottom:none"> </th>
                     <th style="border-top:none; border-bottom:none">Model </th>
                     <th style="border-top:none; border-bottom:none">Series </th>
@@ -87,7 +87,7 @@
             @*<a class=" btn btn-outline-primary float-end" asp-action="CompleteOrder">Check Out</a>*@
             <div id="paypal-btn" class=" float-end"> </div>
             <span style="padding:10px"></span>
-            <a class=" btn btn-outline-success " asp-controller="Inventory" asp-action="Products">Add More Items</a>
+            <a class=" btn btn-outline-info " asp-controller="Inventory" asp-action="Products">Add More Items</a>
         </div>
 
     </div>

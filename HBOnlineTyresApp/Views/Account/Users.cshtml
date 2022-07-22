@@ -1,0 +1,47 @@
+﻿@model IEnumerable<ApplicationUser>
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+@*Wtite Code*@
+
+<div class = "row">
+    <div class = "col offset-md-1">
+        <h4>All Users</h4>
+
+        <table class ="table">
+            <thead class = "text-center">
+               <thead class = "text-center">
+               <tr class="card-header text-white bg-danger"> 
+                  <th> @Html.DisplayNameFor(model => model.FName)</th>
+                  <th> @Html.DisplayNameFor(model => model.UserName)</th>
+                  <th> @Html.DisplayNameFor(model => model.Email)</th>
+                  <th> @Html.DisplayNameFor(model => model.EmailConfirmed)</th>
+                
+              
+               </tr>
+
+            </thead>
+            <tbody class = "text-center"> 
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        
+                        <td class = "align-middle"> @Html.DisplayFor(modelItem => item.FName)</td>
+                        <td class = "align-middle"> @Html.DisplayFor(modelItem => item.UserName)</td>
+                        <td class = "align-middle"> @Html.DisplayFor(modelItem => item.Email)</td>
+                        <td class = "align-middle"> @Html.DisplayFor(modelItem => item.EmailConfirmed)</td>
+                                                
+                        
+                    </tr>
+                }
+            </tbody>
+            
+
+
+        </table>
+    </div>
+
+
+</div>

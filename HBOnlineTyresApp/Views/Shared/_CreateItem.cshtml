@@ -1,5 +1,8 @@
 ﻿@Model string;
+  @if(User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+  {
 
-<div style = "position: fixed; right: 25px; bottom:25px"class ="text-white">
-    <a asp-controller="@Model" asp-action ="Create" class = "btn btn-dark"> <i class = "btn-outline-danger bi-plus-circle"></i> Add New </a>
-</div>
+    <div style = "position: fixed; right: 25px; bottom:25px"class ="text-white">
+        <a asp-controller="@Model" asp-action ="Create" class = "btn btn-dark"> <i class = "btn-outline-danger bi-plus-circle"></i> Add New </a>
+    </div>
+  }

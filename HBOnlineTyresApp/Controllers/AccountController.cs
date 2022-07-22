@@ -4,6 +4,7 @@ using HBOnlineTyresApp.Data.ViewModels;
 using HBOnlineTyresApp.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace HBOnlineTyresApp.Controllers
 {
@@ -19,6 +20,12 @@ namespace HBOnlineTyresApp.Controllers
             _signInManager = signInManager;
             _context = context;
 
+        }
+
+        public async Task<IActionResult> Users()
+        {
+            var users = await _context.Users.ToListAsync();
+            return View(users);
         }
         public IActionResult Login() => View(new LoginVM());
 

@@ -37,8 +37,11 @@
                 </div>
 
                 <div class ="mb-3">
+                      @if(User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                      {
                     <input type ="Submit" value ="Update" class = "btn btn-outline-success float-md-end" />
                     <a class =" btn btn-outline-secondary" asp-action ="Index">Show all Manufacturers</a>
+                      }
                 </div>
                 </form>
              

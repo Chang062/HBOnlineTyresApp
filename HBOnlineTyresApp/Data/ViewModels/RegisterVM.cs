@@ -19,5 +19,7 @@ namespace HBOnlineTyresApp.Data.ViewModels
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Passwords do not match")]
         public string ConfirmPassword { get; set; }
+        
+        
     }
 }
