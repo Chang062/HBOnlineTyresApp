@@ -1,11 +1,14 @@
 ﻿using HBOnlineTyresApp.Data;
 using HBOnlineTyresApp.Data.Services;
+using HBOnlineTyresApp.Data.Static;
 using HBOnlineTyresApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace HBOnlineTyresApp.Controllers
 {
+    [Authorize (Roles = UserRoles.Admin)]
     public class ManufacturersController : Controller
     {
         private readonly IManufacturersService _service;

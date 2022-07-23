@@ -1,12 +1,15 @@
 ﻿using HBOnlineTyresApp.Data;
 using HBOnlineTyresApp.Data.Services;
+using HBOnlineTyresApp.Data.Static;
 using HBOnlineTyresApp.Data.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace HBOnlineTyresApp.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class InventoryController : Controller
     {
         private readonly IInventoryService _service;
@@ -21,6 +24,7 @@ namespace HBOnlineTyresApp.Controllers
             var data = await _service.GetAsync(n => n.Specifications.Tyre.Manufacturer);
             return View(data);
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Products()
 
         {
@@ -29,6 +33,7 @@ namespace HBOnlineTyresApp.Controllers
             return View(data.OrderBy(l=> l.Specifications.Tyre.Name));
         }
         //Filter
+        [AllowAnonymous]
         public async Task<IActionResult> Filter(string searchString)
 
         {
@@ -46,7 +51,7 @@ namespace HBOnlineTyresApp.Controllers
         }
 
         //show product details
-
+        [AllowAnonymous]
         public async Task <IActionResult> Details (int id)
         {
             var productDetails = await _service.GetInventoryByIdAsync(id);

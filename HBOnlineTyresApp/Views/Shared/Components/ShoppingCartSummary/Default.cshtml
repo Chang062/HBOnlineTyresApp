@@ -1,10 +1,11 @@
 ﻿@model int;
 
-@if(Model > 0)
+@if (User.Identity.IsAuthenticated)
 {
-    <li class="nav-item">
-        <a class=" nav-link text-white" asp-controller="Orders" asp-action="ShoppingCart">
-            <i class=" bi bi-cart4"></i>@Model
-        </a>
-    </li>
+    
+        <li class="nav-item">
+            <a class=" nav-link text-white" asp-controller="Orders" asp-action="ShoppingCart">
+                <i class=" bi bi-cart4"></i>@Model
+            </a>
+        </li>
 }

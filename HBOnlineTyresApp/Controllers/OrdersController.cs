@@ -1,11 +1,14 @@
 ﻿using HBOnlineTyresApp.Data.Cart;
 using HBOnlineTyresApp.Data.Services;
+using HBOnlineTyresApp.Data.Static;
 using HBOnlineTyresApp.Data.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace HBOnlineTyresApp.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
         private readonly IInventoryService _inventoryService;

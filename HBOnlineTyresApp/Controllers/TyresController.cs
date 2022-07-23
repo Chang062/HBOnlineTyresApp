@@ -1,12 +1,15 @@
 ﻿using HBOnlineTyresApp.Data;
 using HBOnlineTyresApp.Data.Services;
+using HBOnlineTyresApp.Data.Static;
 using HBOnlineTyresApp.Data.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace HBOnlineTyresApp.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class TyresController : Controller
     {
         private readonly ITyresService _service;
