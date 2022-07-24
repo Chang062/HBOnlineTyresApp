@@ -38,8 +38,9 @@
                   @if(User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
                      {
                 <div class ="mb-3">
-                    <input type ="Submit" value ="Create" class = "btn btn-outline-success float-md-end" />
-                    <a class =" btn btn-outline-secondary" asp-action ="Index">Show all Manufacturers</a>
+                    <input type ="submit" value ="Create" class = "btn btn-outline-success float-md-end createBtn" />
+                     
+                    <a class =" btn btn-outline-secondary " asp-action ="Index">Show all Manufacturers</a>
                 </div>
                      }
                 </form>
@@ -50,17 +51,33 @@
 </div>
 }
 
-
+<form id="createForm" asp-action="Create">
+    <input type="hidden"/>
+</form>
 @section Scripts {
     <script>
         $(document).ready(function(){
             var output = document.getElementById('LogoPreview');
             output.src = $("LogoURL").val();
 
-        })
-        $("#LogoURL").on("change", function (){
+                })
+        $("#LogoURL").on("change", function() {
             var output = document.getElementById('LogoPreview');
             output.src = $(this).val();
-        })
+        });
+    </script>
+
+     <script>
+        $(function(){
+          
+            $('.createBtn').click(function(e){
+                swal({
+                    title: "New Record",
+                    text: "Record was created",
+                    icon: "success",
+                    dangerMode: false
+                });
+            });
+        });
     </script>
 }

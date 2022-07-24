@@ -12,11 +12,11 @@
         </div>
            @if(TempData["Error"] != null)
         {
-            <div class="col-md-12 alert alert-danger text-center">
+            <div class="d-none">
                 <span> @TempData["Error"]</span>
             </div>
         }
-
+   
         <table class="table">
             <thead>
                 <tr class="card-header text-white bg-danger" style="font-family:georgia,garamond,serif;font-size:16px;font-style:italic;">
@@ -40,7 +40,7 @@
                             <a class=" text-danger" asp-controller="Orders" asp-action="RemoveItemFromShoppingCart" asp-route-id=@item.Inventory.Id>
                                 <i class="bi bi-cart-dash"></i>
                             </a>
-                            <a>@item.Amount </a>
+                            <a> @item.Amount </a>
                             <a class=" text-success" asp-controller="Orders" asp-action="AddToShoppingCart" asp-route-id=@item.Inventory.Id>
                                 <i class="bi bi-cart-plus"></i>
                             </a>
@@ -57,7 +57,7 @@
                     <td colspan="4" style="border-top:none; border-bottom:none"></td>
                     <td style="border-top:none; border-bottom:none"><b>Subtotal:</b></td>
                     <td style="border-top:none; border-bottom:none">
-                        @Model.ShoppingSubTotal.ToString("c");
+                        @Model.ShoppingSubTotal.ToString("c")
                     </td>
 
                 </tr>
@@ -66,14 +66,14 @@
                     <td colspan="4" style="border-top:none; border-bottom:none"></td>
                     <td style="border-top:none; border-bottom:none"><b>GCT:</b></td>
                     <td style="border-top:none; border-bottom:none">
-                        @Model.ShoppingTaxTotal.ToString("c");
+                        @Model.ShoppingTaxTotal.ToString("c")
                     </td>
                 </tr>
                 <tr>
                     <td colspan="4" style="border-top:none; border-bottom:none"></td>
                     <td style="border-top:none; border-bottom:none"><b>Grand Total:</b></td>
                     <td style="border-top:none; border-bottom:none">
-                        @Model.ShoppingCartTotal.ToString("c");
+                        @Model.ShoppingCartTotal.ToString("c")
                     </td>
                 </tr>
 
@@ -139,4 +139,15 @@
     }, '#paypal-btn');
 
     </script>
+
+    <script> src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.7/dist/sweetalert2.all.min.js"></script>
+
+<script>
+   $(document).ready(function () {
+      let msg = $('#StatusMessage').val();
+      if(msg.length > 0) {
+          swal.fire(msg);
+      }
+   }
+</script>
 }

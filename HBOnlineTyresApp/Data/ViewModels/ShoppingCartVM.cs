@@ -1,4 +1,5 @@
 ﻿using HBOnlineTyresApp.Data.Cart;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HBOnlineTyresApp.Data.ViewModels
 {
@@ -8,5 +9,8 @@ namespace HBOnlineTyresApp.Data.ViewModels
         public double ShoppingCartTotal { get; set; }
         public double ShoppingSubTotal { get; set; }
         public double ShoppingTaxTotal { get; set; }
+        
+      
+
     }
 }

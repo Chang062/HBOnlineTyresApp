@@ -60,15 +60,15 @@ namespace HBOnlineTyresApp.Controllers
             
         }
         //Delete
-        public async Task<IActionResult> Delete(int id)
+       /* public async Task<IActionResult> Delete(int id)
         {
             var Details = await _service.GetIdAync(id);
             if (Details == null) return View("NotFound");
             return View(Details);
-        }
+        }*/
 
-        [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> Remove(int id)
+        
+        public async Task<IActionResult> Delete(int id)
         {
             var result = await _service.GetIdAync(id);
             if (result == null) return View("NotFound");

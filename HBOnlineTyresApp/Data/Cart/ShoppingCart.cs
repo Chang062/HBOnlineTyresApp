@@ -1,4 +1,5 @@
 ﻿using HBOnlineTyresApp.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace HBOnlineTyresApp.Data.Cart
@@ -7,6 +8,7 @@ namespace HBOnlineTyresApp.Data.Cart
     {
         public AppDbContext _context { get; set; }
         public string ShoppingCartId { get; set; }
+
        
 
         public List<ShoppingCartItem> ShopingCartItems {get; set;}
@@ -29,6 +31,7 @@ namespace HBOnlineTyresApp.Data.Cart
 
         public void AddItemToCart(Inventory inventory)
         {
+
             var cartItem = _context.ShoppingCartItems.FirstOrDefault(q=> q.Inventory.Id == inventory.Id
             && q.ShoppingCartId == ShoppingCartId);
 
@@ -44,7 +47,7 @@ namespace HBOnlineTyresApp.Data.Cart
             }
             else if( cartItem.Amount >= cartItem.Inventory.Quantity)
             {
-               
+                 
             }
                
             else
@@ -75,8 +78,11 @@ namespace HBOnlineTyresApp.Data.Cart
         }
         public List<ShoppingCartItem> GetShoppingCartItems()
         {
-            return ShopingCartItems ?? (ShopingCartItems = _context.ShoppingCartItems.Where(q => q.ShoppingCartId == ShoppingCartId)
-                .Include(q => q.Inventory.Specifications.Tyre).ToList());
+             var ShopingCartItems = _context.ShoppingCartItems.Where(q => q.ShoppingCartId == ShoppingCartId)
+                .Include(q => q.Inventory.Specifications.Tyre).ThenInclude(l=> l.Manufacturer).ToList();
+
+            return ShopingCartItems;
+
         }
 
         public double GetShoppingCartTotal()

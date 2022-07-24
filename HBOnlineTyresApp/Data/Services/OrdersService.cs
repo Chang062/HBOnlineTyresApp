@@ -16,7 +16,7 @@ namespace HBOnlineTyresApp.Data.Services
 
         public async Task<List<Order>> GetOrdersByUserIdAndRoleAsync(string userId, string userRole)
         {
-            var orders = await _context.Orders.Include(l=> l.OrderItems).ThenInclude(l=> l.Inventory.Specifications.Tyre).Include(l=> l.User)
+            var orders = await _context.Orders.Include(l=> l.OrderItems).ThenInclude(l=> l.Inventory.Specifications.Tyre.Manufacturer).Include(l=> l.User)
                 .ToListAsync();
             if(userRole != "Administrator")
             {

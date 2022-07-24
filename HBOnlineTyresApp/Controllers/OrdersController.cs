@@ -14,6 +14,9 @@ namespace HBOnlineTyresApp.Controllers
         private readonly IInventoryService _inventoryService;
         private readonly ShoppingCart _shoppingCart;
         private readonly IOrdersService _ordersService;
+
+        [TempData]
+        public string StatusMessage { get; set; }
         public OrdersController(IInventoryService inventoryService, ShoppingCart shoppingCart, IOrdersService ordersService)
         {
             _inventoryService = inventoryService;
@@ -32,6 +35,7 @@ namespace HBOnlineTyresApp.Controllers
         {
 
             var items = _shoppingCart.GetShoppingCartItems();
+            
             _shoppingCart.ShopingCartItems = items;
             var response = new ShoppingCartVM()
             {
