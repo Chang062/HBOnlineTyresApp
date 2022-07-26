@@ -91,6 +91,42 @@ namespace HBOnlineTyresApp.Controllers
             }
             return View(forgotPasswordVM);
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ResetPassword( string token, string email)
+        { 
+            if(token == null || email == null)
+            {
+                ModelState.AddModelError("", "Invalid password reset token");
+            }
+            return View();
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> ResetPassword(ResetPasswordVM resetPasswordVM)
+        {
+            if (ModelState.IsValid)
+            {
+                var appUser = await _userManager.FindByEmailAsync(resetPasswordVM.Email);
+                if(appUser != null)
+                {
+                    var result = await _userManager.ResetPasswordAsync(appUser, resetPasswordVM.Token, resetPasswordVM.Password);
+                    if(result.Succeeded)
+                    {
+                        return View("ResetPasswordConfirmation");
+                    }
+                    foreach ( var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                    return View(resetPasswordVM);
+                }
+                return View("ResetPasswordConfirmation");
+            }
+            return View(resetPasswordVM);
+        }
+
         public IActionResult Register() => View(new RegisterVM());
 
         [HttpPost]
