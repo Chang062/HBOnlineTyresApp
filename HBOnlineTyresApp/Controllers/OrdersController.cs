@@ -33,17 +33,17 @@ namespace HBOnlineTyresApp.Controllers
         }
         public IActionResult ShoppingCart()
         {
-
-            var items = _shoppingCart.GetShoppingCartItems();
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var items = _shoppingCart.GetShoppingCartItems(userId);
             
             _shoppingCart.ShopingCartItems = items;
             var response = new ShoppingCartVM()
             {
                 ShoppingCart = _shoppingCart,
                 
-                ShoppingCartTotal = _shoppingCart.GetShoppingCartTotal(),
-                ShoppingSubTotal = _shoppingCart.GetShoppingSubTotal(),
-                ShoppingTaxTotal = _shoppingCart.GetShoppingTaxTotal(),
+                ShoppingCartTotal = _shoppingCart.GetShoppingCartTotal(userId),
+                ShoppingSubTotal = _shoppingCart.GetShoppingSubTotal(userId),
+                ShoppingTaxTotal = _shoppingCart.GetShoppingTaxTotal(userId),
 
             };
             return View(response);
@@ -51,10 +51,11 @@ namespace HBOnlineTyresApp.Controllers
         public async Task <RedirectToActionResult> AddToShoppingCart(int id)
         {
             var item = await _inventoryService.GetInventoryByIdAsync(id);
-            
-            if(item != null)
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (item != null)
             {
-                _shoppingCart.AddItemToCart(item);
+                _shoppingCart.AddItemToCart(item, userId);
                 
                 
             }
@@ -76,12 +77,12 @@ namespace HBOnlineTyresApp.Controllers
 
         public async Task <IActionResult> CompleteOrder()
         {
-            var items =  _shoppingCart.GetShoppingCartItems();
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var items =  _shoppingCart.GetShoppingCartItems(userId);            
             string userEmailAddress = User.FindFirstValue(ClaimTypes.Email);
            await _ordersService.StoreOrderAsync(items, userId, userEmailAddress);
 
-            await _shoppingCart.ClearShoppingCartAsync();
+            await _shoppingCart.ClearShoppingCartAsync(userId);
 
             return View("OrderCompleted");
 

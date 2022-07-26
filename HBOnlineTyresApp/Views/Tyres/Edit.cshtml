@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-md-8 offset-2">
                 <form asp-action="Edit">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                   <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="row">
                         <div class="col-md-6">
@@ -47,7 +47,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label asp-for="Description" class="control-label"></label>
-                                <textarea asp-for="Description" class="form-control"></textarea>
+                                <textarea asp-for="Description" class="form-control" rows="6"></textarea>
                                 <span asp-validation-for="Description" class="text-danger"></span>
                             </div>
                         </div>
@@ -60,7 +60,8 @@
                     <div class="form-group">
                           @if(User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
                              {
-                                <input type="submit" value="Update" class="btn btn-outline-success float-end" />
+                               @*<input type="submit" value="Update" class="btn btn-outline-success float-end" />*@ 
+                                 <button data-id="@Model.Id" class="btn btn-outline-success float-end EditBtn" type="button"> Update </button>
                                 <a class="btn btn-outline-secondary" asp-action="Index">Show all</a>
                              }
                     </div>
@@ -73,6 +74,10 @@
     </div>
 </div>
 
+  <form asp-action="Edit" id="updateForm" >
+   <input type="hidden" id="updateId" name="Id"/>
+  </form>
+
 @section Scripts {
     <script>
         $(document).ready(function(){
@@ -84,5 +89,24 @@
             var output = document.getElementById('LogoPreview');
             output.src = $(this).val();
         })
+
+
+            $('.EditBtn').click(function(e) {
+                swal({
+                    title: "Update Record",
+                    text: "Are you sure you want to update this record?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true
+                }).then((confirm) => {
+                        if(confirm){
+                            var btn = $(this);
+                            var id = btn.data("id");
+                            $('#updateId').val(id);
+                            $('#updateForm').submit();
+                        }
+                    });
+            });
+        });
     </script>
 }

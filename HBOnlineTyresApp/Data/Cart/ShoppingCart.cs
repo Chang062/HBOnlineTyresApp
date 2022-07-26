@@ -1,6 +1,8 @@
 ﻿using HBOnlineTyresApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.Cosmos;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace HBOnlineTyresApp.Data.Cart
 {
@@ -9,7 +11,7 @@ namespace HBOnlineTyresApp.Data.Cart
         public AppDbContext _context { get; set; }
         public string ShoppingCartId { get; set; }
 
-       
+    
 
         public List<ShoppingCartItem> ShopingCartItems {get; set;}
 
@@ -29,17 +31,17 @@ namespace HBOnlineTyresApp.Data.Cart
             return new ShoppingCart(context) { ShoppingCartId = cartId };
         }
 
-        public void AddItemToCart(Inventory inventory)
+        public void AddItemToCart(Inventory inventory, string userId)
         {
 
             var cartItem = _context.ShoppingCartItems.FirstOrDefault(q=> q.Inventory.Id == inventory.Id
-            && q.ShoppingCartId == ShoppingCartId);
+            && q.UserId == userId);
 
             if(cartItem == null)
             {
                 cartItem = new ShoppingCartItem()
                 {
-                    ShoppingCartId = ShoppingCartId,
+                   UserId = userId,
                     Inventory = inventory,
                     Amount = 1
                 };
@@ -60,7 +62,7 @@ namespace HBOnlineTyresApp.Data.Cart
         public void RemoveItemFromCart(Inventory inventory)
         {
             var cartItem = _context.ShoppingCartItems.FirstOrDefault(q => q.Inventory.Id == inventory.Id
-            && q.ShoppingCartId == ShoppingCartId);
+            /*&& q.ShoppingCartId == ShoppingCartId*/);
 
             if (cartItem != null)
             {
@@ -76,40 +78,42 @@ namespace HBOnlineTyresApp.Data.Cart
             }
                 _context.SaveChanges();
         }
-        public List<ShoppingCartItem> GetShoppingCartItems()
+        public List<ShoppingCartItem> GetShoppingCartItems(string userId)
         {
-             var ShopingCartItems = _context.ShoppingCartItems.Where(q => q.ShoppingCartId == ShoppingCartId)
+            //string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var ShopingCartItems = _context.ShoppingCartItems.Where(l=> l.UserId == userId)
                 .Include(q => q.Inventory.Specifications.Tyre).ThenInclude(l=> l.Manufacturer).ToList();
 
             return ShopingCartItems;
 
         }
+        
 
-        public double GetShoppingCartTotal()
+        public double GetShoppingCartTotal(string userId)
         {
-            var total = _context.ShoppingCartItems.Where(q=> q.ShoppingCartId == ShoppingCartId)
+            var total = _context.ShoppingCartItems.Where(q=> q.UserId == userId)
                 .Select(q=> q.Inventory.Specifications.Cost * q.Amount + (q.Inventory.Specifications.Cost * 0.15)).Sum();
             return total;
         }
 
-        public double GetShoppingSubTotal()
+        public double GetShoppingSubTotal(string userId)
         {
-            var total = _context.ShoppingCartItems.Where(q => q.ShoppingCartId == ShoppingCartId)
+            var total = _context.ShoppingCartItems.Where(q => q.UserId == userId)
                 .Select(q => q.Inventory.Specifications.Cost * q.Amount).Sum();
             return total;
         }
-        public double GetShoppingTaxTotal()
+        public double GetShoppingTaxTotal(string userId)
         {
-            var total = _context.ShoppingCartItems.Where(q => q.ShoppingCartId == ShoppingCartId)
+            var total = _context.ShoppingCartItems.Where(q => q.UserId == userId)
                 .Select(q => q.Inventory.Specifications.Cost * q.Amount*(.15)).Sum();
             return total;
         }
 
 
 
-        public async Task ClearShoppingCartAsync()
+        public async Task ClearShoppingCartAsync(string userId)
         {
-            var items = await _context.ShoppingCartItems.Where(q => q.ShoppingCartId == ShoppingCartId).ToListAsync();
+            var items = await _context.ShoppingCartItems.Where(q => q.UserId == userId).ToListAsync();
             _context.ShoppingCartItems.RemoveRange(items);
             await _context.SaveChangesAsync();
         }

@@ -83,7 +83,7 @@ namespace HBOnlineTyresApp.Data.Services
            var details = _context.Specifications.Include(t => t.Tyre)
                 .Include(m => m.Tyre.Manufacturer)
                 .Include(c => c.Tyre.category).FirstOrDefault(n => n.Id == id);
-            return details;
+            return   details;
 
       
         }
