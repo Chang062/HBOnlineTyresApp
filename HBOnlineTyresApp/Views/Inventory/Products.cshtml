@@ -76,3 +76,15 @@
     }
 </div>
 
+ @section Scripts{
+    <script>
+               
+        //viewbag
+    var strValue = "@((string)ViewBag.msg)";
+    if (strValue != null && strValue != '') {
+        swal("Added", strValue, "success");
+    }
+
+    </script>
+}
+

@@ -1,9 +1,11 @@
 ﻿using HBOnlineTyresApp.Data.Base;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HBOnlineTyresApp.Models
 {
+    [Index(nameof(SpecsId),IsUnique = true)]
     public class Inventory:IEntityBase
     {
         [Key]

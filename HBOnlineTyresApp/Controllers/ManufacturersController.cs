@@ -20,6 +20,9 @@ namespace HBOnlineTyresApp.Controllers
         public async Task<IActionResult> Index()
         {
             var data = await _service.GetAllAsync();
+            ViewBag.msg = TempData["msg"] as string;
+            ViewBag.delete = TempData["delete"] as string;
+            ViewBag.edit = TempData["edit"] as string;
             return View(data);
         }
 
@@ -37,6 +40,7 @@ namespace HBOnlineTyresApp.Controllers
                 return View(manufacturer);
             }
             await _service.AddAsync(manufacturer);
+            TempData["msg"] = "Record was successfully Created.";
             return RedirectToAction(nameof(Index));
         }
 
@@ -56,6 +60,7 @@ namespace HBOnlineTyresApp.Controllers
                 return View(manufacturer);
             }
             await _service.UpdateAsync(id, manufacturer);
+            TempData["edit"] = "Record Was Successfuly Updated.";
             return RedirectToAction(nameof(Index));
             
         }
@@ -74,8 +79,8 @@ namespace HBOnlineTyresApp.Controllers
             if (result == null) return View("NotFound");
 
             await _service.DeleteAsync(id);
-            
-          return RedirectToAction(nameof(Index));
+            TempData["delete"] = "Delete Operation Was Successfuly Completed.";
+            return RedirectToAction(nameof(Index));
 
         }
     }

@@ -124,7 +124,8 @@ namespace HBOnlineTyresApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SpecsId");
+                    b.HasIndex("SpecsId")
+                        .IsUnique();
 
                     b.ToTable("Inventories");
                 });
@@ -152,6 +153,37 @@ namespace HBOnlineTyresApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Manufacturers");
+                });
+
+            modelBuilder.Entity("HBOnlineTyresApp.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("DateReceived")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("Viewed")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("HBOnlineTyresApp.Models.Order", b =>

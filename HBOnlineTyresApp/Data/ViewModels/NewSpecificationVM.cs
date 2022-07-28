@@ -5,6 +5,7 @@ namespace HBOnlineTyresApp.Data.ViewModels
     public class NewSpecificationVM
     {
         public int Id { get; set; }
+        [Display(Name = "Model")]
         public int TyreId { get; set; }
         [Display(Name = "Tyre Size")]
         public string Size { get; set; }

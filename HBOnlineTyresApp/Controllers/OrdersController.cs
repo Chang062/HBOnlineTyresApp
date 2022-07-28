@@ -1,9 +1,13 @@
-﻿using HBOnlineTyresApp.Data.Cart;
+﻿using HBOnlineTyresApp.Data;
+using HBOnlineTyresApp.Data.Cart;
 using HBOnlineTyresApp.Data.Services;
 using HBOnlineTyresApp.Data.Static;
 using HBOnlineTyresApp.Data.ViewModels;
+using HBOnlineTyresApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Security.Claims;
 
 namespace HBOnlineTyresApp.Controllers
@@ -14,14 +18,16 @@ namespace HBOnlineTyresApp.Controllers
         private readonly IInventoryService _inventoryService;
         private readonly ShoppingCart _shoppingCart;
         private readonly IOrdersService _ordersService;
+        private readonly AppDbContext _context;
 
         [TempData]
         public string StatusMessage { get; set; }
-        public OrdersController(IInventoryService inventoryService, ShoppingCart shoppingCart, IOrdersService ordersService)
+        public OrdersController(IInventoryService inventoryService, ShoppingCart shoppingCart, IOrdersService ordersService, AppDbContext context)
         {
             _inventoryService = inventoryService;
             _shoppingCart = shoppingCart;
             _ordersService = ordersService;
+            _context = context;
             
         }
         public async Task<IActionResult> Index()
@@ -29,6 +35,7 @@ namespace HBOnlineTyresApp.Controllers
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             string userRole = User.FindFirstValue(ClaimTypes.Role);
             var orders = await _ordersService.GetOrdersByUserIdAndRoleAsync(userId, userRole);
+            ViewBag.delete = TempData["delete"] as string;
             return View(orders);
         }
         public IActionResult ShoppingCart()
@@ -59,8 +66,25 @@ namespace HBOnlineTyresApp.Controllers
                 
                 
             }
-            return RedirectToAction(nameof(ShoppingCart));
+            TempData["msg"] = "Item Was Successfuly Added To Cart.";
+            return RedirectToAction("Products", "Inventory");
             
+
+        }
+        public async Task<RedirectToActionResult> UpdateShoppingCart(int id)
+        {
+            var item = await _inventoryService.GetInventoryByIdAsync(id);
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (item != null)
+            {
+                _shoppingCart.AddItemToCart(item, userId);
+
+
+            }
+
+            return RedirectToAction(nameof(ShoppingCart));
+
 
         }
 
@@ -87,5 +111,17 @@ namespace HBOnlineTyresApp.Controllers
             return View("OrderCompleted");
 
         }
+        public async Task<IActionResult> Delete(int id)
+        {
+            var entity = await _context.Orders.FirstOrDefaultAsync(n => n.Id == id);
+            EntityEntry entityentry = _context.Entry<Order>(entity);
+            entityentry.State = EntityState.Deleted;
+            await _context.SaveChangesAsync();
+
+            TempData["delete"] = "Delete Operation Was Successfuly Completed.";
+            return RedirectToAction(nameof(Index));
+        }
+
+     
     }
 }

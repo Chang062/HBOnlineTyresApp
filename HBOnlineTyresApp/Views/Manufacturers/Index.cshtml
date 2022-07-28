@@ -8,8 +8,9 @@
 
 <div class = "row">
     <div class = "col offset-md-1">
+         <h2 class="align-middle text-center" style="font-family:Dubai">BRANDS</h2>
         @await Html.PartialAsync("_CreateItem", "Manufacturers")
-        <input type = "button" value="Alert Message" name="alertMessage" id="btnAlertMessage" />
+        
         <table class ="table">
             <thead class = "text-center">
                
@@ -34,13 +35,9 @@
                               @if(User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
                              {
                             <a class ="btn btn-outline-primary" asp-action ="Edit" asp-route-id = "@item.Id"><i class = "bi bi-pencil-square"></i></a>
-                                @*<a id = "delete" class = "btn btn-danger" asp-action="" asp-route-id = ""> <i class = "bi bi-trash"></i></a> *@  
-                                <button data-id="@item.Id" class="btn btn-danger deleteBtn" type="button"><i class = "bi bi-trash"></i></button>
-                                @*<a class = "btn btn-danger"  
-                                data-id = "@item.Id"
-                                data-controller = "Manufacturers"
-                                data-action = "Delete"
-                                data-body-message = "Are you sure you wish to delete this record"><i class = "bi bi-trash"></i></a> *@
+                               <a id = "delete" class = "btn btn-danger" asp-action="Delete" asp-route-id = "@item.Id"> <i class = "bi bi-trash"></i></a>  
+                               @* <button data-id="@item.Id" class="btn btn-danger deleteBtn" type="button"><i class = "bi bi-trash"></i></button>*@
+                     
                              }
                         </td>
 
@@ -86,5 +83,24 @@
                 });
             });
         });
+
+        
+        //viewbag
+    var strValue = "@((string)ViewBag.msg)";
+    if (strValue != null && strValue != '') {
+        swal("Created", strValue, "success");
+    }
+
+      var strValue = "@((string)ViewBag.delete)";
+    if (strValue != null && strValue != '') {
+        swal("Deleted", strValue, "success");
+    }
+
+       var strValue = "@((string)ViewBag.edit)";
+    if (strValue != null && strValue != '') {
+        swal("Updated", strValue, "success");
+    }
+
+
     </script>
 }

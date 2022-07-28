@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Castle.Core" Version="5.0.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.6" />
     <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.29.0" />
@@ -22,6 +23,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.7" />
+    <PackageReference Include="StackExchange.Redis" Version="2.6.48" />
     <PackageReference Include="SweetAlert" Version="1.0.0" />
   </ItemGroup>
 

@@ -14,6 +14,7 @@ using System.Text.Encodings.Web;
 
 namespace HBOnlineTyresApp.Controllers
 {
+   
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -29,15 +30,17 @@ namespace HBOnlineTyresApp.Controllers
             _emailSender = emailSender;
 
         }
-
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> Users()
         {
             var users = await _context.Users.ToListAsync();
             return View(users);
         }
+       
         public IActionResult Login() => View(new LoginVM());
 
         [HttpPost]
+      
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginVM loginVM)
         {
@@ -68,10 +71,11 @@ namespace HBOnlineTyresApp.Controllers
         }
 
         [HttpGet]
+       
         public IActionResult ForgotPassword() => View(new ForgotPasswordVM());
 
         [HttpPost]
-        [AllowAnonymous]
+      
         public async Task<IActionResult>ForgotPassword(ForgotPasswordVM forgotPasswordVM)
         {
             if (ModelState.IsValid)
@@ -93,7 +97,7 @@ namespace HBOnlineTyresApp.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
+      
         public async Task<IActionResult> ResetPassword( string token, string email)
         { 
             if(token == null || email == null)
@@ -103,7 +107,7 @@ namespace HBOnlineTyresApp.Controllers
             return View();
         }
         [HttpPost]
-        [AllowAnonymous]
+      
         public async Task<IActionResult> ResetPassword(ResetPasswordVM resetPasswordVM)
         {
             if (ModelState.IsValid)
@@ -127,10 +131,11 @@ namespace HBOnlineTyresApp.Controllers
             return View(resetPasswordVM);
         }
 
+       
         public IActionResult Register() => View(new RegisterVM());
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+       
         public async Task<IActionResult> Register(RegisterVM registerVM)
         {
             string returnUrl = null;
@@ -179,7 +184,7 @@ namespace HBOnlineTyresApp.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+       // [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();

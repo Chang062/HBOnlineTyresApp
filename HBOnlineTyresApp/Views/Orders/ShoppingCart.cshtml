@@ -41,7 +41,7 @@
                                 <i class="bi bi-cart-dash"></i>
                             </a>
                             <a> @item.Amount </a>
-                            <a class=" text-success" asp-controller="Orders" asp-action="AddToShoppingCart" asp-route-id=@item.Inventory.Id>
+                            <a class=" text-success" asp-controller="Orders" asp-action="UpdateShoppingCart" asp-route-id=@item.Inventory.Id>
                                 <i class="bi bi-cart-plus"></i>
                             </a>
                         </td>
@@ -87,7 +87,7 @@
             @*<a class=" btn btn-outline-primary float-end" asp-action="CompleteOrder">Check Out</a>*@
             <div id="paypal-btn" class=" float-end"> </div>
             <span style="padding:10px"></span>
-            <a class=" btn btn-outline-info " asp-controller="Inventory" asp-action="Products">Add More Items</a>
+            <a class=" btn btn-outline-success" asp-controller="Inventory" asp-action="Products">Add More Items</a>
         </div>
 
     </div>
@@ -110,8 +110,8 @@
     //customize button
     locale: 'en_US',
     style: {
-        size: 'medium',
-        color: 'blue',
+        size: 'large',
+        color: 'gold',
         shape: 'pill'
     },
     commit: true,

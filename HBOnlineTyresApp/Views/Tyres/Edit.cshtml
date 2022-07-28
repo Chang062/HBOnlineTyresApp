@@ -60,8 +60,8 @@
                     <div class="form-group">
                           @if(User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
                              {
-                               @*<input type="submit" value="Update" class="btn btn-outline-success float-end" />*@ 
-                                 <button data-id="@Model.Id" class="btn btn-outline-success float-end EditBtn" type="button"> Update </button>
+                               <input type="submit" value="Update" class="btn btn-outline-success float-end" />
+                                 @*<button data-id="@Model.Id" class="btn btn-outline-success float-end EditBtn" type="button"> Update </button>*@
                                 <a class="btn btn-outline-secondary" asp-action="Index">Show all</a>
                              }
                     </div>

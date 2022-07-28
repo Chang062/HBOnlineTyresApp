@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Message>
+
+@{
+    ViewData["Title"] = "Messages";
+}
+
+@*Wtite Code*@
+
+ @if(User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+{
+<div class = "row">
+    <div class = "col-md-8 offset-2">
+         <h2 class="align-middle text-center" style="font-family:Dubai">MESSAGES</h2>
+        
+        <table class ="table">
+            <thead class = "text-center">
+               <tr class="card-header text-white bg-danger">                    
+                  <th> @Html.DisplayNameFor(model => model.FullName)</th>
+                  <th> @Html.DisplayNameFor(model => model.PhoneNumber)</th>
+                  <th> @Html.DisplayNameFor(model => model.Description)</th>
+                  <th> @Html.DisplayNameFor(model => model.Viewed)</th>
+                  <th style = ""> </th>
+                  
+               </tr>
+
+            </thead>
+            <tbody class = "text-center"> 
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class = "align-middle">  @Html.DisplayFor(modelItem => item.FullName)</td>
+                        <td class = "align-middle "> @Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                        <td class = "align-middle "> @Html.DisplayFor(modelItem => item.Description)</td>
+                        <td class = "align-middle"> @Html.DisplayFor(modelItem => item.Viewed)</td>
+                        <td class = "align-middle"> 
+                             
+                            <a class = "btn btn-outline-primary" asp-action ="Edit" asp-route-id = "@item.Id"><i class = "bi bi-pencil-square"></i></a>
+                            <a class = "btn btn-danger" id="btnAlertMsg" asp-action ="" asp-route-id = "@item.Id"><i class = "bi bi-trash"></i></a> 
+                             
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+            
+
+
+        </table>
+    </div>
+
+</div>
+}

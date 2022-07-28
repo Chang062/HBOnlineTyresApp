@@ -1,4 +1,5 @@
-﻿using HBOnlineTyresApp.Models;
+﻿using HBOnlineTyresApp.Data.Base;
+using HBOnlineTyresApp.Models;
 
 namespace HBOnlineTyresApp.Data.Services
 {

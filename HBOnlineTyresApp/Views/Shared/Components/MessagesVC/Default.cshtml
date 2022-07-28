@@ -1,0 +1,11 @@
+﻿@model int;
+
+@if (User.Identity.IsAuthenticated)
+{
+    
+        <li class="nav-item">
+            <a class=" nav-link text-white" asp-controller="ContactUs" asp-action="Messages">
+                <i class="bi bi-inbox"></i>@Model
+            </a>
+        </li>
+}

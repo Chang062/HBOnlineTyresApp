@@ -22,6 +22,11 @@ namespace HBOnlineTyresApp.Controllers
         public async Task<IActionResult> Index()
         {
             var data = await _service.GetAsync(n => n.Specifications.Tyre.Manufacturer);
+            ViewBag.msg = TempData["msg"] as string;
+            ViewBag.del = TempData["del"] as string;
+            ViewBag.edit = TempData["edit"] as string;
+            ViewBag.error = TempData["error"] as string;
+
             return View(data);
         }
         [AllowAnonymous]
@@ -30,6 +35,7 @@ namespace HBOnlineTyresApp.Controllers
         {
                      
             var data = await _service.GetAsync(n=> n.Specifications.Tyre.Manufacturer, p=> p.Specifications.Tyre.category);
+            ViewBag.msg = TempData["msg"] as string;
             return View(data.OrderBy(l=> l.Specifications.Tyre.Name));
         }
         //Filter
@@ -68,14 +74,27 @@ namespace HBOnlineTyresApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(NewInventoryVM inventory)
         {
-            if(!ModelState.IsValid)
+            try
             {
-                ViewBag.SpecsId = await _service.GetNewInventoryDropdownValues();  //new SelectList(dropdownData.Specs, "Id", "Name");
-                return View();
+                if (!ModelState.IsValid)
+                {
+                    ViewBag.SpecsId = await _service.GetNewInventoryDropdownValues();  //new SelectList(dropdownData.Specs, "Id", "Name");
+                    return View();
+                }
+
+                await _service.AddNewInventoryAsync(inventory);
+
+                TempData["msg"] = "Item Was Successfuly Added To Inventory.";
+
+                return RedirectToAction(nameof(Index));
+
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = "Something Went Wrong";
+                return RedirectToAction(nameof(Index));
             }
 
-            await _service.AddNewInventoryAsync(inventory);
-            return RedirectToAction(nameof(Index));
         }
 
         //Update
@@ -105,16 +124,17 @@ namespace HBOnlineTyresApp.Controllers
             }
 
             await _service.UpdateInventoryAsync(inventory);
+            TempData["edit"] = "Item Was Successfuly Updated.";
             return RedirectToAction(nameof(Index));
         }
         //Delete
     
-        public async Task<IActionResult> Remove(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var inventoryDetails = await _service.GetInventoryByIdAsync(id);
             if (inventoryDetails == null) return View("NotFound");
-            
             await _service.DeleteAsync(id);
+            TempData["del"] = "Delete Operation Was Successfuly Completed.";
             return RedirectToAction(nameof(Index));
         }
     }

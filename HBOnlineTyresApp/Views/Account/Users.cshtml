@@ -7,23 +7,23 @@
 @*Wtite Code*@
 
 <div class = "row">
-    <div class = "col-md-6 offset-md-3">
-        <h3 class="text-center">ALL USERS</h3>
+    <div class = "col-md-8 offset-md-2">
+        <h3 style="padding:20px"  class="text-center">ALL USERS</h3>
 
         <table class ="table">
             <thead class = "text-center">
                <thead class = "text-center">
                <tr class="card-header text-white bg-danger"> 
-                  <th> @Html.DisplayNameFor(model => model.FName)</th>
-                  <th> @Html.DisplayNameFor(model => model.UserName)</th>
-                  <th> @Html.DisplayNameFor(model => model.Email)</th>
-                  <th> @Html.DisplayNameFor(model => model.EmailConfirmed)</th>
+                  <th> Full Name</th>
+                  <th> User Name</th>
+                  <th> Email Address</th>
+                  <th> Email Address Confirmed</th>
                 
               
                </tr>
 
             </thead>
-            <tbody class = "text-center"> 
+            <tbody class = "text-left"> 
                 @foreach (var item in Model)
                 {
                     <tr>
@@ -31,7 +31,7 @@
                         <td class = "align-middle"> @Html.DisplayFor(modelItem => item.FName)</td>
                         <td class = "align-middle"> @Html.DisplayFor(modelItem => item.UserName)</td>
                         <td class = "align-middle"> @Html.DisplayFor(modelItem => item.Email)</td>
-                        <td class = "align-middle"> @Html.DisplayFor(modelItem => item.EmailConfirmed)</td>
+                        <td class = "text-center"> @Html.DisplayFor(modelItem => item.EmailConfirmed)</td>
                                                 
                         
                     </tr>
@@ -45,3 +45,15 @@
 
 
 </div>
+
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+    $('.table').DataTable();
+        });
+
+   
+    </Script>
+ }

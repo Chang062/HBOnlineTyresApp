@@ -17,6 +17,7 @@ namespace HBOnlineTyresApp.Data
         public DbSet<Specification> Specifications { get; set; }
         public DbSet<Inventory> Inventories { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         //orders
         public DbSet<Order> Orders { get; set; }

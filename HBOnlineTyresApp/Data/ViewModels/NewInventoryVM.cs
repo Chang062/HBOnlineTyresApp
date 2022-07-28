@@ -1,8 +1,10 @@
 ﻿using HBOnlineTyresApp.Models;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace HBOnlineTyresApp.Data.ViewModels
 {
+    
     public class NewInventoryVM
     {
         public int Id { get; set; }

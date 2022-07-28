@@ -8,7 +8,6 @@ namespace HBOnlineTyresApp.Models
         [Display(Name = "Full Name")]
         public string FName { get; set; }
 
-
-
+      
     }
 }
