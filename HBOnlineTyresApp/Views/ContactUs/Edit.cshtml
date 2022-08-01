@@ -60,9 +60,9 @@
                     <div class="form-group">
                           @if(User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
                              {
+                                  @Html.AntiForgeryToken()
                                <input type="submit" value="Mark as Read" class="btn btn-outline-success float-end" />
-                                
-                                <a class="btn btn-outline-secondary" asp-action="Messages">Back to list</a>
+                               <a class="btn btn-outline-secondary" asp-action="Messages">Back to list</a>
                              }
                     </div>
 

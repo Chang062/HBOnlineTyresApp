@@ -71,11 +71,13 @@ namespace HBOnlineTyresApp.Controllers
         }
 
         [HttpGet]
-       
+        [ValidateAntiForgeryToken]
+
         public IActionResult ForgotPassword() => View(new ForgotPasswordVM());
 
         [HttpPost]
-      
+        [ValidateAntiForgeryToken]
+
         public async Task<IActionResult>ForgotPassword(ForgotPasswordVM forgotPasswordVM)
         {
             if (ModelState.IsValid)
@@ -97,17 +99,19 @@ namespace HBOnlineTyresApp.Controllers
         }
 
         [HttpGet]
-      
+        [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> ResetPassword( string token, string email)
         { 
             if(token == null || email == null)
             {
-                ModelState.AddModelError("", "Invalid password reset token");
+                 ModelState.AddModelError("", "Invalid password reset token");
             }
             return View();
         }
         [HttpPost]
-      
+        [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> ResetPassword(ResetPasswordVM resetPasswordVM)
         {
             if (ModelState.IsValid)
@@ -135,7 +139,8 @@ namespace HBOnlineTyresApp.Controllers
         public IActionResult Register() => View(new RegisterVM());
 
         [HttpPost]
-       
+        [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> Register(RegisterVM registerVM)
         {
             string returnUrl = null;
@@ -184,7 +189,7 @@ namespace HBOnlineTyresApp.Controllers
 
 
         [HttpPost]
-       // [ValidateAntiForgeryToken]
+       [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();

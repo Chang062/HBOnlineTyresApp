@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 namespace HBOnlineTyresApp.Controllers
 {
     [Authorize(Roles = UserRoles.Admin)]
+  
     public class InventoryController : Controller
     {
         private readonly IInventoryService _service;
@@ -72,6 +73,7 @@ namespace HBOnlineTyresApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(NewInventoryVM inventory)
         {
             try
@@ -115,6 +117,7 @@ namespace HBOnlineTyresApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id,NewInventoryVM inventory)
         {
             if (!ModelState.IsValid)

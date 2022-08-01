@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace HBOnlineTyresApp.Controllers
 {
     [Authorize(Roles = UserRoles.Admin)]
+   
     public class SpecificationsController : Controller
     {
         private readonly ISpecificationsService _service;
@@ -33,6 +34,7 @@ namespace HBOnlineTyresApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(NewSpecificationVM specs)
         {
 
@@ -76,6 +78,7 @@ namespace HBOnlineTyresApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, NewSpecificationVM specs)
         {
             var specsDetails = await _service.GetSpecificationsByIdAsync(id);

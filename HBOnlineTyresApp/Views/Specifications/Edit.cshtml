@@ -99,6 +99,7 @@
                     <div class="form-group">
                           @if(User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
                              {
+                                  @Html.AntiForgeryToken()
                                 <input type="submit" value="Update" class="btn btn-outline-success float-end" />
                                 <a class="btn btn-outline-secondary" asp-action="Index">Back to list</a>
                              }

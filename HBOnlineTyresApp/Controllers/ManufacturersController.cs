@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace HBOnlineTyresApp.Controllers
 {
     [Authorize (Roles = UserRoles.Admin)]
+    
     public class ManufacturersController : Controller
     {
         private readonly IManufacturersService _service;
@@ -33,6 +34,7 @@ namespace HBOnlineTyresApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name, LogoURL, Description")]Manufacturer manufacturer)
         {
             if(!ModelState.IsValid)
@@ -53,6 +55,7 @@ namespace HBOnlineTyresApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id, Name, LogoURL, Description")] Manufacturer manufacturer)
         {
             if (!ModelState.IsValid)

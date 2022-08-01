@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 namespace HBOnlineTyresApp.Controllers
 {
     [Authorize(Roles = UserRoles.Admin)]
+   
     public class TyresController : Controller
     {
         private readonly ITyresService _service;
@@ -37,6 +38,7 @@ namespace HBOnlineTyresApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(NewTyreVM tyre)
         {
             if (!ModelState.IsValid)
@@ -73,6 +75,7 @@ namespace HBOnlineTyresApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit( int id, NewTyreVM tyre)
         {
             if (id != tyre.Id) return View("NotFound");

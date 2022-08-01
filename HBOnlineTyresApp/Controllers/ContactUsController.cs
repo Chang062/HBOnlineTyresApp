@@ -22,6 +22,7 @@ namespace HBOnlineTyresApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(MessageVM contact)
         {
             if (ModelState.IsValid)
@@ -63,6 +64,7 @@ namespace HBOnlineTyresApp.Controllers
             return View(response);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, MessageVM msgVm)
         {
             if (ModelState.IsValid)

@@ -5,6 +5,7 @@ using HBOnlineTyresApp.Data.Static;
 using HBOnlineTyresApp.Data.ViewModels;
 using HBOnlineTyresApp.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -13,22 +14,22 @@ using System.Security.Claims;
 namespace HBOnlineTyresApp.Controllers
 {
     [Authorize]
+
     public class OrdersController : Controller
     {
         private readonly IInventoryService _inventoryService;
         private readonly ShoppingCart _shoppingCart;
         private readonly IOrdersService _ordersService;
         private readonly AppDbContext _context;
+        private readonly IEmailSender _emailSender;
 
-        [TempData]
-        public string StatusMessage { get; set; }
-        public OrdersController(IInventoryService inventoryService, ShoppingCart shoppingCart, IOrdersService ordersService, AppDbContext context)
+        public OrdersController(IInventoryService inventoryService, ShoppingCart shoppingCart, IOrdersService ordersService, AppDbContext context, IEmailSender emailSender)
         {
             _inventoryService = inventoryService;
             _shoppingCart = shoppingCart;
             _ordersService = ordersService;
             _context = context;
-            
+            _emailSender = emailSender;
         }
         public async Task<IActionResult> Index()
         {
@@ -105,8 +106,12 @@ namespace HBOnlineTyresApp.Controllers
             var items =  _shoppingCart.GetShoppingCartItems(userId);            
             string userEmailAddress = User.FindFirstValue(ClaimTypes.Email);
            await _ordersService.StoreOrderAsync(items, userId, userEmailAddress);
+            
 
-            await _shoppingCart.ClearShoppingCartAsync(userId);
+            await _shoppingCart.ClearShoppingCartAsync(userId);        
+
+            await _emailSender.SendEmailAsync(userEmailAddress, "Order Completed",
+                  $"Your order was successful {items.ToList()}");
 
             return View("OrderCompleted");
 
