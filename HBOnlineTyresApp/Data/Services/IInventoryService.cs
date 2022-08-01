@@ -11,7 +11,7 @@ namespace HBOnlineTyresApp.Data.Services
          Task<SelectList> GetNewInventoryDropdownValues();
         Task AddNewInventoryAsync(NewInventoryVM inventory);
         Task UpdateInventoryAsync(NewInventoryVM inventory);
-        Task DeleteInventoryAsync(NewInventoryVM inventory);
+        
 
     }
 }

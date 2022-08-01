@@ -64,13 +64,7 @@ namespace HBOnlineTyresApp.Controllers
             return RedirectToAction(nameof(Index));
             
         }
-        //Delete
-       /* public async Task<IActionResult> Delete(int id)
-        {
-            var Details = await _service.GetIdAync(id);
-            if (Details == null) return View("NotFound");
-            return View(Details);
-        }*/
+    
 
         
         public async Task<IActionResult> Delete(int id)

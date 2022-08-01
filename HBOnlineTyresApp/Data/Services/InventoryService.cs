@@ -26,21 +26,7 @@ namespace HBOnlineTyresApp.Data.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteInventoryAsync(NewInventoryVM inventory)
-        {
-            var dbInv = await _context.Inventories.FirstOrDefaultAsync(q => q.Id == inventory.Id);
-            if(dbInv != null)
-            {
-                inventory.SpecsId = dbInv.SpecsId;
-                inventory.Quantity = dbInv.Quantity;
-
-                EntityEntry entityentry = _context.Entry<Inventory>(dbInv);
-                entityentry.State = EntityState.Deleted;
-            }
-
-            await _context.SaveChangesAsync();
-        }
-
+     
         public async Task<Inventory> GetInventoryByIdAsync(int id)
         {
             var productDetails = await _context.Inventories

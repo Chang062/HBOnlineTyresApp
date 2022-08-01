@@ -15,6 +15,8 @@ namespace HBOnlineTyresApp.Models
         public ApplicationUser User { get; set; }
 
         public List<OrderItem> OrderItems { get; set; }
+
+        [Display(Name = "Date of Order")]
         public DateTime  OrderDate { get; set; }
 
 

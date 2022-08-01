@@ -17,7 +17,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-black border-bottom box-shadow mb-3" style="font-family:Dubai; font-size:20px">
             <div class="container-fluid">
-                <a class="navbar-brand" style="padding-left:25px"  asp-controller="Home" asp-action="Index"><img src = "https://drive.google.com/uc?id=1J5yCF1C4m6VPWJHTtoB0WwJGWpCga_tY" style ="max-width:80px"/></a>
+                <a class="navbar-brand" style="padding-left:25px"  asp-controller="Home" asp-action="Index"><img src = "~/Image/logo2.png" style ="max-width:80px"/></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -64,9 +64,10 @@
                     </form>
 
                     <ul class=" navbar-nav">
-                      @await Component.InvokeAsync("ShoppingCartSummary")
+                     @**@   @await Component.InvokeAsync("ShoppingCartSummary")
+                     @await Component.InvokeAsync("UnreadMessages")  
                     </ul>
-                    
+                     
                    <partial name ="_Identity.cshtml"/>
 
                 </div>

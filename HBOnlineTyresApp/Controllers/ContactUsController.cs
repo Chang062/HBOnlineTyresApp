@@ -1,4 +1,5 @@
-﻿using HBOnlineTyresApp.Data.Services;
+﻿using HBOnlineTyresApp.Data.Messages;
+using HBOnlineTyresApp.Data.Services;
 using HBOnlineTyresApp.Data.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,9 +7,10 @@ namespace HBOnlineTyresApp.Controllers
 {
     public class ContactUsController : Controller
     {
-        private readonly IContactUsService _service;
+        private readonly Inbox _service;
+        
 
-        public ContactUsController(IContactUsService service)
+        public ContactUsController(Inbox service)
         {
             _service = service;
 
@@ -28,6 +30,7 @@ namespace HBOnlineTyresApp.Controllers
 
                 TempData["msg"] = "Message was successfully sent";
 
+
                 return RedirectToAction(nameof(Index));
             }
             return View();
@@ -35,8 +38,12 @@ namespace HBOnlineTyresApp.Controllers
 
         public async Task<IActionResult> Messages()
         {
+            bool read = false;
             var messages = await _service.GetAllAsync();
-            return View(messages);
+            var unread =  _service.GetAllUnreadMessages(read);
+            ViewBag.del = TempData["del"] as string;
+            return View(messages.OrderByDescending(l=> l.Viewed==false));
+
         }
 
         public async Task<IActionResult> Edit(int id)
@@ -66,5 +73,15 @@ namespace HBOnlineTyresApp.Controllers
 
             return View();
         }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var inbox = await _service.GetMsgByIdAsync(id);
+            if (inbox == null) return View("NotFound");
+            await _service.DeleteAsync(id);
+            TempData["del"] = "Delete Operation Was Successfuly Completed.";
+            return RedirectToAction(nameof(Messages));
+        }
+
     }
 }

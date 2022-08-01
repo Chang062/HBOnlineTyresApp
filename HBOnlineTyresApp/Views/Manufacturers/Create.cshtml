@@ -5,55 +5,61 @@
     ViewData["Title"] = "Create Manufacturer";
 }
 
-@using (Html.BeginForm())
-{
-<div class = "row text">
-    <div class ="col-md-8 offset-1">
+<div class="row">
+    <div class="col-md-8 offset-2">
         <p>
-            <h4>Add a new manufacturer</h4>
+            <h4>Add a new Manufacturer</h4>
         </p>
 
-        <div class ="row">
-            <div class = "col-md-8 offset-3">
-                <form action = "/" method = "post">            
-                   <div asp-validation-summary = "All" class = "text-danger"></div>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    
                       <div class = "mb-3 text-center">
-                    <img id = "LogoPreview" style = "max-width:300px" />
-                </div>
-                <div class ="mb-3">
-                    <label asp-for="LogoURL" class = "control-label"></label>
-                    <input asp-for="LogoURL" class = "form-control" placeholder="Logo URL..."  />
-                    <span asp-validation-for="LogoURL" class = "text-danger"></span>
-                </div>
-                <div class ="mb-3">
-                    <label asp-for="Name" class = "control-label"></label>
-                    <input asp-for="Name" class = "form-control" />
-                    <span asp-validation-for="Name" class = "text-danger"></span>
-                </div>
-                <div class ="mb-3">
-                    <label asp-for="Description" class = "form-label"></label>
-                    <textarea asp-for="Description" class = "form-control" rows = "6"></textarea>
-                    <span asp-validation-for="Description" class = "text-danger"></span>
-                </div>
-                  @if(User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
-                     {
-                <div class ="mb-3">
-                    <input type ="submit" value ="Create" class = "btn btn-outline-success float-md-end createBtn" />
-                     
-                    <a class =" btn btn-outline-secondary " asp-action ="Index">Show all Manufacturers</a>
-                </div>
-                     }
+                        <img id = "LogoPreview" style = "max-width:300px" />
+                            </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                           
+                            <div class="form-group">
+                                <label asp-for="LogoURL" class="control-label"></label>
+                                <input asp-for="LogoURL" class="form-control" />
+                                <span asp-validation-for="LogoURL" class="text-danger"></span>
+                            </div>                                           
+                        
+                            <div class="form-group">
+                                <label asp-for="Description" class="control-label"></label>
+                                <textarea asp-for="Description" class="form-control" rows="10px"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                         </div>
+                    </div>
+
+                    <div class="form-group" style="padding: 25px">
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                        {
+                            <input type="submit" value="Create" class="btn btn-outline-success float-end" />
+                            <a class="btn btn-outline-secondary" asp-action="Index">Back to list</a>
+                        }
+                    </div>
+
                 </form>
-             
+
             </div>
         </div>
+
     </div>
 </div>
-}
 
-<form id="createForm" asp-action="Create">
-    <input type="hidden"/>
-</form>
+
+
 @section Scripts {
     <script>
         $(document).ready(function(){

@@ -60,20 +60,6 @@ namespace HBOnlineTyresApp.Data.Cart
             _context.SaveChanges();
         }
 
-        /*public void CheckCartItems(Inventory inventory)
-        {
-
-            var cartItem = _context.ShoppingCartItems.FirstOrDefault(q => q.Inventory.Id == inventory.Id);
-
-           
-            else if (cartItem.Amount >= cartItem.Inventory.Quantity)
-            {
-
-            }
-
-            
-        }*/
-
         public void RemoveItemFromCart(Inventory inventory)
         {
             var cartItem = _context.ShoppingCartItems.FirstOrDefault(q => q.Inventory.Id == inventory.Id

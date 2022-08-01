@@ -6,18 +6,18 @@ namespace HBOnlineTyresApp.Data.ViewModels
     {
         public int Id { get; set; }
         [Required]
-        [Display(Name = "Full Name")]
+        [Display(Name = "Sender")]
         public string FullName { get; set; }
 
         [Required]
-        [Display(Name = "Email Address")]
+        [Display(Name = "Email or Contact No.")]
         public string PhoneNumber { get; set; }
 
         [Required]
         [Display(Name = "Message")]
         public string Description { get; set; }
 
-        [Display(Name = "Viewed")]
+        [Display(Name = "Read")]
         public bool? Viewed { get; set; }
         public DateTime DateReceived { get; set; }
     }

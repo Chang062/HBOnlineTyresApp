@@ -11,6 +11,6 @@ namespace HBOnlineTyresApp.Data.Services
         Task<SelectList> GetDropdownValues();
         Task AddNewSpecificationAsync(NewSpecificationVM specs);
         Task UpdateSpecificationAsync(NewSpecificationVM specs);
-        Task DeleteSpecificationAsync(NewSpecificationVM specs);
+       
     }
 }

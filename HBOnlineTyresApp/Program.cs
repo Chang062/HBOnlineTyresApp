@@ -1,5 +1,6 @@
 using HBOnlineTyresApp.Data;
 using HBOnlineTyresApp.Data.Cart;
+using HBOnlineTyresApp.Data.Messages;
 using HBOnlineTyresApp.Data.Services;
 using HBOnlineTyresApp.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -23,9 +24,10 @@ builder.Services.AddScoped<IInventoryService, InventoryService>();
 builder.Services.AddScoped<ITyresService, TyresService>();
 builder.Services.AddScoped<ISpecificationsService, SpecificationsService>();
 builder.Services.AddScoped<IOrdersService, OrdersService>();
-builder.Services.AddScoped<IContactUsService, ContactUsService>();
+//builder.Services.AddScoped<IContactUsService, ContactUsService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+builder.Services.AddScoped(sc => Inbox.GetInbox(sc));
 //identity and authorization
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(opt => { opt.SignIn.RequireConfirmedEmail = true;}).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 builder.Services.AddMemoryCache();

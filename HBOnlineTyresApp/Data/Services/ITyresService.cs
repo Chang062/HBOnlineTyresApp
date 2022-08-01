@@ -10,7 +10,7 @@ namespace HBOnlineTyresApp.Data.Services
         Task<NewTyreDropdownVM> GetNewTyreDropdownValues();
         Task AddNewTyreAsync(NewTyreVM data);
         Task UpdateTyreAsync(NewTyreVM data);
-        Task DeleteTyreAsync(NewTyreVM data);
+        
     }
 }
 

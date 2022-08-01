@@ -41,35 +41,7 @@ namespace HBOnlineTyresApp.Data.Services
             await _context.SaveChangesAsync();
         }
 
-        //Delete Specification
-        public async Task DeleteSpecificationAsync(NewSpecificationVM specs)
-        {
-            var dbSpecs = await _context.Specifications.FirstOrDefaultAsync(q => q.Id == specs.Id);
-            if(dbSpecs != null)
-            {
-                dbSpecs.TyreId = specs.TyreId;
-                dbSpecs.Size = specs.Size;
-                dbSpecs.RimSize = specs.RimSize;
-                dbSpecs.ServiceDescription = specs.ServiceDescription;
-                dbSpecs.SideWall = specs.SideWall;
-                dbSpecs.Diameter = specs.Diameter;
-                dbSpecs.MaxPSI = specs.MaxPSI;
-                dbSpecs.SectionWidth = specs.SectionWidth;
-                dbSpecs.MaxLoad = specs.MaxLoad;
-                dbSpecs.Weight = specs.Weight;
-                dbSpecs.ThreadDept = specs.ThreadDept;
-                dbSpecs.AprovedRimWidth = specs.AprovedRimWidth;
-                dbSpecs.Cost = specs.Cost;
-                
-                EntityEntry entityentry = _context.Entry<Specification>(dbSpecs);
-                entityentry.State = EntityState.Deleted;            
-
-            }
-            
-            
-            await _context.SaveChangesAsync();
-        }
-
+        
         //Dropdown List
         public async Task<SelectList> GetDropdownValues()
         {

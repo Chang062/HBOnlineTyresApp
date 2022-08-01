@@ -7,11 +7,16 @@ namespace HBOnlineTyresApp.Models
     {
         [Key]
         public int Id { get; set; }
+        [Display(Name = "Sender")]
         public string FullName { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Description { get; set; }
 
+        [Display(Name = "Email or Contact No.")]
+        public string PhoneNumber { get; set; }
+        [Display(Name = "Message")]
+        public string Description { get; set; }
+        [Display(Name = "Date Received")]
         public DateTime DateReceived { get; set; }
+        [Display(Name = "Read")]
         public bool? Viewed { get; set; }
 
 

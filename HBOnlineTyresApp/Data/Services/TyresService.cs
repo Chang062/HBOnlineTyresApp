@@ -63,28 +63,6 @@ namespace HBOnlineTyresApp.Data.Services
     
 
         }
-        public async Task DeleteTyreAsync(NewTyreVM data)
-        {
-            var dbTyre = await _context.Tyres.FirstOrDefaultAsync(q => q.Id == data.Id);
-            if (dbTyre != null)
-            {
-
-                dbTyre.Name = data.Name;
-                dbTyre.CategoryId = data.CategoryId;
-                dbTyre.ImageURL = data.ImageURL;
-                dbTyre.ManufacturerId = data.ManufacturerId;
-                dbTyre.Description = data.Description;
-
-              
-             
-               EntityEntry entityentry = _context.Entry<Tyre>(dbTyre);
-               entityentry.State = EntityState.Deleted;
-              // _context.Tyres.Remove(dbTyre);
-                await _context.SaveChangesAsync();
-
-            }
-
-
-        }
+       
     }
 }
