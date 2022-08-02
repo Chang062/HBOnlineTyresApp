@@ -458,4 +458,186 @@ thead th {
 }
 
 
+/*Image above about us*/
+.container_about {
+    width: 100%;
+    height: 50vh;
+    position: relative;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+    .container_about .bg-image {
+        object-position: top;
+        border-block-color: black;
+        position: absolute;
+        width: 100%;
+        z-index: -1
+    }
+
+/*About us*/
+.about{
+    margin-top:-20%;
+}
+.about-1a {
+    margin: 30px;
+    padding: 5px;
+}
+
+    .about-1a h1 {
+        text-align: center;
+        color: white;
+        font-weight: bold;
+      
+    }
+
+    .about-1a p {
+        text-align: center;
+        padding: 3px;
+        color: #fff;
+        font-size: 25px;
+        background-color: dimgray;
+    }
+
+
+.about-item {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    background-color: white;
+    padding: 80px,30px;
+    box-shadow: 0 0 9px rgba(0,0,0 .6);
+}
+
+    .about-item i {
+        font-size: 43px;
+        margin: 0;
+    }
+
+    .about-item h3 {
+        font-size: 25px;
+        margin-bottom: 10px;
+    }
+
+    .about-item hr {
+        width: 46px;
+        height: 3px;
+        background-color: #5fbff9;
+        margin: 0 auto;
+        border: none;
+    }
+
+    .about-item p {
+        margin-top: 20px;
+    }
+
+    .about-item:hover {
+        background-color: firebrick;
+    }
+
+        .about-item:hover i,
+        .about-item:hover h3,
+        .about-item:hover p {
+            color: #fff;
+        }
+
+        .about-item:hover hr {
+            background-color: black;
+        }
+
+        .about-item:hover::after i {
+            transform: translateY(-20px);
+        }
+
+        .about-item:hover i,
+        .about-item:hover h3,
+        .about-item:hover hr {
+            transition: all 400ms ease-in-out;
+        }
+
+/*ACCORDIAN FAQ*/
+
+.faq{
+    margin-top: 5%;
+  
+}
+
+    .faq h1 {
+        text-align: center;
+        padding-bottom: 3%;
+    }
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+}
+
+section2 {
+    width: 100%;
+    height: 150vh;
+    background-color: #ebd8d8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.accordion-item {
+    background-color: #fafafa;
+    border-radius: .4rem;
+    margin-bottom: 1rem;
+    padding: 3rem;
+    box-shadow: .5rem 2px .5rem rgba(0,0,0,.1);
+}
+
+.accordion-link {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: rgba(225,225,225,.8);
+    text-decoration: none;
+    background-color: darkred;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.answer {
+    position: relative;
+    background-color: #333030;
+    height: 150px;
+    
+}
+
+    .answer::before {
+        content: "";
+        position: absolute;
+        width: .6rem;
+        height: 100%;
+        background-color: #8fc460;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+    }
+
+    .answer p {
+        color: white;
+        font-size: 19px;
+        padding: 20px;
+    }
+
+.accordion-item:target .answer {
+    max-height: 20rem;
+}
+
+
         

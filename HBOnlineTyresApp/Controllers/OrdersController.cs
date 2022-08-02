@@ -111,9 +111,10 @@ namespace HBOnlineTyresApp.Controllers
             await _shoppingCart.ClearShoppingCartAsync(userId);        
 
             await _emailSender.SendEmailAsync(userEmailAddress, "Order Completed",
-                  $"Your order was successful {items.ToList()}");
+                  $"Your order was successful, kindly pick up your order from our \nwharehouse or contact us at (876) 123-4567 to arrange for delivery.\n\nThank you.");
 
-            return View("OrderCompleted");
+
+           return View("OrderCompleted");
 
         }
         public async Task<IActionResult> Delete(int id)

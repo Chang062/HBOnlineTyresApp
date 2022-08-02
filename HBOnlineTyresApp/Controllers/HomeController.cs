@@ -18,7 +18,7 @@ namespace HBOnlineTyresApp.Controllers
             return View();
         }
 
-        public IActionResult ContactUs()
+        public IActionResult AboutUs()
         {
             return View();
         }
