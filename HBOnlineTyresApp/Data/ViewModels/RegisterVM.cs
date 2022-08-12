@@ -8,8 +8,13 @@ namespace HBOnlineTyresApp.Data.ViewModels
         [Display(Name = "Full Name")]
         public string FullName { get; set; }
 
+        [Required(ErrorMessage = "Username is Required")]
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
+
         [Required (ErrorMessage = "A Valid Email Address is Required")]
         [Display(Name = "Email Address")]
+        [EmailAddress(ErrorMessage ="Invalid Email Address")]
         public  string EmailAddress { get; set; }
         [Required]
         [DataType(DataType.Password)]

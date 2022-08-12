@@ -31,7 +31,7 @@
                     <tr>
                         <td class = "align-middle">  @Html.DisplayFor(modelItem => item.FullName)</td>
                        
-                        <td class = "align-middle "> @Html.DisplayFor(modelItem => item.DateReceived)</td>
+                        <td class = "align-middle "> @string.Format("{0:f}", item.DateReceived)</td>
                        
                         <td class = "align-middle"> @Html.DisplayFor(modelItem => item.Viewed)</td>
                         <td class = "align-middle"> 

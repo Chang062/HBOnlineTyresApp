@@ -35,8 +35,8 @@
                               @if(User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
                              {
                             <a class ="btn btn-outline-primary" asp-action ="Edit" asp-route-id = "@item.Id"><i class = "bi bi-pencil-square"></i></a>
-                               <a id = "delete" class = "btn btn-danger" asp-action="Delete" asp-route-id = "@item.Id"> <i class = "bi bi-trash"></i></a>  
-                               @* <button data-id="@item.Id" class="btn btn-danger deleteBtn" type="button"><i class = "bi bi-trash"></i></button>*@
+                               <a id = "delete" class = "btn btn-danger" asp-action="Delete" asp-route-id = "@item.Id"> <i class = "bi bi-trash"></i></a> 
+                               @* <button data-id="@item.Id" class="btn btn-danger deleteBtn" ><i class = "bi bi-trash"></i></button>*@  
                      
                              }
                         </td>
@@ -62,17 +62,20 @@
 
  @section Scripts{
     <script>
-        $(function(){
+        $(function (){
             $('.table').DataTable();
             $('.deleteBtn').click(function(e){
                 swal({
                     title: "Your about to delete a record!!!",
                     text: "Are you sure you want to deleted this record?",
-                    icon: "warning",
-                    buttons: true,
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: `Yes`,
+                    confirmButtonClass: "btn-danger",
+                    showConfirmButton: true,
                     dangerMode: true
-                }).then((confirm) =>{
-                    if(confirm){
+                }).then((isConfirm) =>{
+                    if(isConfirm){
                         var btn = $(this);
                         var id = btn.data("id");
                         $('#manufacturerid').val(id);

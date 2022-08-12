@@ -24,7 +24,7 @@ namespace HBOnlineTyresApp.Data.ViewModels
         [Display(Name = "Description")]
         public string Description { get; set; }
 
-        [Display(Name = "Image")]
+        [Display(Name = "Image URL")]
         [Required(ErrorMessage = "This field cannot be left empty")]
         public string ImageURL { get; set; }
 

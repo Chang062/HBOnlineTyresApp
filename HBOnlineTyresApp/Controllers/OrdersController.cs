@@ -37,7 +37,7 @@ namespace HBOnlineTyresApp.Controllers
             string userRole = User.FindFirstValue(ClaimTypes.Role);
             var orders = await _ordersService.GetOrdersByUserIdAndRoleAsync(userId, userRole);
             ViewBag.delete = TempData["delete"] as string;
-            return View(orders);
+           return View(orders.OrderBy(l=> l.Id).ToList());
         }
         public IActionResult ShoppingCart()
         {
@@ -114,8 +114,8 @@ namespace HBOnlineTyresApp.Controllers
                   $"Your order was successful, kindly pick up your order from our \nwharehouse or contact us at (876) 123-4567 to arrange for delivery.\n\nThank you.");
 
 
-           return View("OrderCompleted");
-
+            return View("OrderCompleted");
+           
         }
         public async Task<IActionResult> Delete(int id)
         {

@@ -43,7 +43,7 @@ namespace HBOnlineTyresApp.Controllers
             var messages = await _service.GetAllAsync();
             var unread =  _service.GetAllUnreadMessages(read);
             ViewBag.del = TempData["del"] as string;
-            return View(messages.OrderByDescending(l=> l.Viewed==false));
+            return View(messages.OrderBy(l=> l.Viewed==false));
 
         }
 

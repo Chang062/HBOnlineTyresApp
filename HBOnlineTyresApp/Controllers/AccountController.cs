@@ -151,7 +151,7 @@ namespace HBOnlineTyresApp.Controllers
             {
                 FName = registerVM.FullName,
                 Email = registerVM.EmailAddress,
-                UserName = registerVM.EmailAddress,
+                UserName = registerVM.UserName,
             };
             var newUserResponse = await _userManager.CreateAsync(newUser, registerVM.Password);
 

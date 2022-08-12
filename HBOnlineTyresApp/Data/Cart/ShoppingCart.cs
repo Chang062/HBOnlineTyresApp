@@ -63,7 +63,7 @@ namespace HBOnlineTyresApp.Data.Cart
         public void RemoveItemFromCart(Inventory inventory)
         {
             var cartItem = _context.ShoppingCartItems.FirstOrDefault(q => q.Inventory.Id == inventory.Id
-            /*&& q.ShoppingCartId == ShoppingCartId*/);
+             );
 
             if (cartItem != null)
             {
@@ -84,6 +84,8 @@ namespace HBOnlineTyresApp.Data.Cart
             //string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var ShopingCartItems = _context.ShoppingCartItems.Where(l=> l.UserId == userId)
                 .Include(q => q.Inventory.Specifications.Tyre).ThenInclude(l=> l.Manufacturer).ToList();
+
+            
 
             return ShopingCartItems;
 

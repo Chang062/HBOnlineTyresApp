@@ -10,7 +10,7 @@ namespace HBOnlineTyresApp.Models
         [Display(Name = "Name")]
         [Required (ErrorMessage = "Name of Manufacturer is required")]
         public string Name { get; set; }
-        [Display(Name = "Logo")]
+        [Display(Name = "Logo URL")]
         [Required(ErrorMessage = "Logo URL is required")]
         public string LogoURL { get; set; }
         [Display(Name = "Biography")]

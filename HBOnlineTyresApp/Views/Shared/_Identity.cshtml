@@ -44,33 +44,7 @@ else
     <span style="padding-left:10px"></span>
 }
 
-<form id="deleteForm" asp-action="Logout">
-    <input type="hidden" id="invid" name="id"/>
-</form>
- @section Scripts{
-    <script>
-        $(function(){
-            $('.table').DataTable();
-            $('.deleteBtn').click(function(e){
-                swal({
-                    title: "Your about to delete a record!!!",
-                    text: "Are you sure you want to deleted this record?",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true
-                }).then((confirm) =>{
-                    if(confirm){
-                        var btn = $(this);
-                        var id = btn.data("id");
-                        $('#invid').val(id);
-                        $('#deleteForm').submit();
-                        swal("Deleted!", "Your Record has been Deleted", "success");
-                        
-                    }
-                });
-            });
-        });
-    </script>
-}
+
+
 
 

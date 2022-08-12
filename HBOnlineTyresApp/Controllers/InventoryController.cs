@@ -88,10 +88,11 @@ namespace HBOnlineTyresApp.Controllers
 
                 TempData["msg"] = "Item Was Successfuly Added To Inventory.";
 
+
                 return RedirectToAction(nameof(Index));
 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 TempData["error"] = "Something Went Wrong";
                 return RedirectToAction(nameof(Index));
