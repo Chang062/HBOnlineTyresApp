@@ -26,6 +26,7 @@
                     <th style="border-top:none; border-bottom:none">Qty </th>
                     <th style="border-top:none; border-bottom:none">Price </th>
                     <th style="border-top:none; border-bottom:none">Subtotal </th>
+                    <th></th>
 
                 </tr>
             </thead>
@@ -47,7 +48,7 @@
                         </td>
                         <td class="align-middle" style="border-top:none; border-bottom:none">@item.Inventory.Specifications.Cost.ToString("c")</td>
                         <td class="align-middle" style="border-top:none; border-bottom:none">@((@item.Amount * item.Inventory.Specifications.Cost).ToString("c"))</td>
-
+                        <td class="align-middle" style="border-top:none; border-bottom:none">  <a class = "btn btn-danger" id="btnAlertMsg" asp-controller="Orders" asp-action ="DeleteItemFromShoppingCart" asp-route-id = "@item.Inventory.Id"><i class = "bi bi-trash"></i></a> </td>
                     </tr>
                 }
 

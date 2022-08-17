@@ -100,6 +100,20 @@ namespace HBOnlineTyresApp.Controllers
 
         }
 
+        public async Task<RedirectToActionResult> DeleteItemFromShoppingCart(int id)
+        {
+            var item = await _inventoryService.GetInventoryByIdAsync(id);
+            if (item != null)
+            {
+                _shoppingCart.DeleteItemFromCart(item);
+            }
+            return RedirectToAction(nameof(ShoppingCart));
+
+        }
+
+
+
+
         public async Task <IActionResult> CompleteOrder()
         {
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

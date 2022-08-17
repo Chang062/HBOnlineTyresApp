@@ -33,7 +33,7 @@
                             @foreach (var item in order.OrderItems)
                             {
                                 <li>@item.Inventory.Specifications.Tyre.Manufacturer.Name @item.Inventory.Specifications.Tyre.Name</li>
-                                <li>Series: @item.Inventory.Specifications.Size</li>
+                                <li>Series: @item.Inventory.Specifications.Size @item.Inventory.Specifications.ServiceDescription</li>
                                 <li style="padding-bottom:10px">Qty: @item.Amount </li>  
                                 
                             }

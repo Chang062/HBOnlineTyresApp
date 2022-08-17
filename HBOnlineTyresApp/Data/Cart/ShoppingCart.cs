@@ -79,10 +79,21 @@ namespace HBOnlineTyresApp.Data.Cart
             }
                 _context.SaveChanges();
         }
-        public List<ShoppingCartItem> GetShoppingCartItems(string userId)
+
+        public void DeleteItemFromCart(Inventory inventory)
         {
-            //string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var ShopingCartItems = _context.ShoppingCartItems.Where(l=> l.UserId == userId)
+            var cartItem = _context.ShoppingCartItems.FirstOrDefault(q => q.Inventory.Id == inventory.Id);
+            if (cartItem != null)
+            {
+                _context.ShoppingCartItems.Remove(cartItem);
+
+            }
+            _context.SaveChanges();
+        }
+
+            public List<ShoppingCartItem> GetShoppingCartItems(string userId)
+        {
+                 var ShopingCartItems = _context.ShoppingCartItems.Where(l=> l.UserId == userId)
                 .Include(q => q.Inventory.Specifications.Tyre).ThenInclude(l=> l.Manufacturer).ToList();
 
             
